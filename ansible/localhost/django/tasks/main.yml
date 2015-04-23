@@ -1,0 +1,16 @@
+---
+  - name: Install Boto Python package via Pip
+    pip: name=boto
+    sudo: yes
+
+  - name: Install Django
+    pip: name=Django==1.8
+    sudo: yes
+
+  - name: Install Django REST
+    pip: name=djangorestframework
+    sudo: yes
+
+  - name: Install Markdown (for browsable API)
+    pip: name=markdown
+    sudo: yes
