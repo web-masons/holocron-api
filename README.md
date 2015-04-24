@@ -15,3 +15,6 @@
     - Hello World! API should be present
     
 <i>(In progress...)</i>
+
+ # To Run tests
+ <code> python manage.py test api </code>
