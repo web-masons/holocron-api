@@ -1,6 +1,13 @@
 ---
 - hosts: all
   sudo: true
+  vars:
+    http_port: 80
+    domain: holocron-api.com
+    project: holocron-api
+    main_app: holocron_api
+    app: api
+    APACHE_LOG_DIR: /var/log/apache2
   tasks:
 
   roles:

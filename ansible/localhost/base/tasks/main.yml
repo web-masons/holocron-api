@@ -21,7 +21,61 @@
         - python-psycopg2
         - git
         - ntp
+        - apache2
+        - apache2.2-common
+        - apache2-mpm-prefork
+        - apache2-utils
+        - openssl
+        - ssl-cert
+        - libexpat1
+        - libapache2-mod-wsgi
 
     - name: Check NTP service to make sure it's running
       service: name=ntp state=started enabled=yes
       sudo: yes
+
+    - name: Check Apache service to make sure it's running
+      service: name=apache2 state=started enabled=yes
+      sudo: yes
+
+    - name: enabled mod_rewrite
+      apache2_module: name=rewrite state=present
+      notify:
+        - restart apache2
+
+    - name: a2ensite ssl
+      command: a2enmod ssl
+      notify:
+        - restart apache2
+
+    - name: apache2 NameVirtualHost Port
+      lineinfile: dest=/etc/apache2/ports.conf regexp="^NameVirtualHost " line="NameVirtualHost *:{{ http_port }}" state=present
+      notify:
+        - restart apache2
+
+    - name: apache2 listen on Specified Port
+      lineinfile: dest=/etc/apache2/ports.conf regexp="^Listen " line="Listen {{ http_port }}" state=present
+      notify:
+        - restart apache2
+
+    - name: create virtual host file
+      template: src=virtualhost.conf dest=/etc/apache2/sites-available/{{ domain }}
+      sudo: yes
+
+    - name: apache2 virtualhost on Specified Port
+      lineinfile: dest=/etc/apache2/sites-available/{{ domain }} regexp="^<VirtualHost \*:" line="<VirtualHost *:{{ http_port }}>"
+      notify:
+        - restart apache2
+
+    - name: delete default file
+      command: rm /etc/apache2/sites-enabled/000-default
+      sudo: yes
+      notify:
+        - restart apache2
+
+    - name: a2ensite {{ domain }}
+      command: a2ensite {{ domain }}
+      args:
+        creates: /etc/apache2/sites-enabled/{{ domain }}.conf
+      notify:
+        - restart apache2
