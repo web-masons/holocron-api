@@ -48,13 +48,26 @@
       notify:
         - restart apache2
 
+    - name: check for SSL folder
+      stat: path=/etc/apache2/ssl
+      register: ssl_path
+
+    - name: create SSL folder
+      command: mkdir /etc/apache2/ssl
+      when: ssl_path.stat.exists == false
+
+    - name: create self-signed SSL cert
+      command: openssl req -new -nodes -x509 -subj "/C=US/ST=Massachusetts/L=Boston/O=Carb/CN={{ domain }}" -days 3650 -keyout /etc/apache2/ssl/server.key -out /etc/apache2/ssl/server.crt -extensions v3_ca creates=/etc/apache2/ssl/server.crt
+      notify:
+        - restart apache2
+
     - name: apache2 NameVirtualHost Port
-      lineinfile: dest=/etc/apache2/ports.conf regexp="^NameVirtualHost " line="NameVirtualHost *:{{ http_port }}" state=present
+      lineinfile: dest=/etc/apache2/ports.conf regexp="^NameVirtualHost " line=" " state=present
       notify:
         - restart apache2
 
     - name: apache2 listen on Specified Port
-      lineinfile: dest=/etc/apache2/ports.conf regexp="^Listen " line="Listen {{ http_port }}" state=present
+      lineinfile: dest=/etc/apache2/ports.conf regexp="^Listen " line=" " state=present
       notify:
         - restart apache2
 
@@ -67,8 +80,13 @@
       notify:
         - restart apache2
 
+    - name: check for Default file
+      stat: path=/etc/apache2/sites-enabled/000-default
+      register: default_file_check
+
     - name: delete default file
       command: rm /etc/apache2/sites-enabled/000-default
+      when: default_file_check.stat.exists
       sudo: yes
       notify:
         - restart apache2

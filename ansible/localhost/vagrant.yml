@@ -2,7 +2,7 @@
 - hosts: all
   sudo: true
   vars:
-    http_port: 80
+    http_port: 443
     domain: holocron-api.com
     project: holocron-api
     main_app: holocron_api
