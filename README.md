@@ -1,18 +1,18 @@
 # holocron-api
  
  
- # Intro
+ <h1>Intro </h1>
  This is the API for the Holocron project.  It is built using Vagrant, Ansible, Python, Django and Django REST framework.
  
- # To Install and run
- 1. Clone (or Fork) repository 
- 2. cd to /holocron_api folder, where Vagrantile is located
- 3.<p> <code> vagrant up </code> </p>
- 4. <p> <code> vagrant ssh </code> into the vagrant box that is created </p>
- 5. <p> <code> python manage.py runserver 192.168.42.42:80" </code> </p>
+ <h2>To Install and run </h2>
+ 1. <p>Clone (or Fork) repository </p>
+ 2. <p>cd to /holocron_api folder, where Vagrantile is located </p>
+ 3. <p><code> vagrant up </code> </p>
+ 4. <p><code> vagrant ssh </code> into the vagrant box that is created </p>
+ 5. <p><code> python manage.py runserver 192.168.42.42:80" </code> </p>
  6. View test API at https://holocron-api.com/
     
 <i>(In progress...)</i>
 
- # To Run tests
- <p> <code> python manage.py test api </code> </p>
+ <h2>To Run tests</h2>
+ <p> <code> python manage.py test api </code>  - Run from main app folder where <i>manage.py</i> is present </p>
