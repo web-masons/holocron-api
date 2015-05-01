@@ -56,11 +56,6 @@
       command: mkdir /etc/apache2/ssl
       when: ssl_path.stat.exists == false
 
-    - name: create self-signed SSL cert
-      command: openssl req -new -nodes -x509 -subj "/C=US/ST=Massachusetts/L=Boston/O=Carb/CN={{ domain }}" -days 3650 -keyout /etc/apache2/ssl/server.key -out /etc/apache2/ssl/server.crt -extensions v3_ca creates=/etc/apache2/ssl/server.crt
-      notify:
-        - restart apache2
-
     - name: apache2 NameVirtualHost Port
       lineinfile: dest=/etc/apache2/ports.conf regexp="^NameVirtualHost " line=" " state=present
       notify:
