@@ -7,8 +7,9 @@
  <h2>To Install and run </h2>
  1. <p>Clone (or Fork) repository </p>
  2. <p>cd to /holocron_api folder, where Vagrantile is located </p>
+ <p>      -Note: If not already created, create "settings.ini" file inside of /ansible/localhost.  A template is provided.
  3. <p><code> vagrant up </code> </p>
- 6. View test API at https://holocron-api.com/
+ 4. View test API at https://holocron-api.com/
     
 <i>(In progress...)</i>
 

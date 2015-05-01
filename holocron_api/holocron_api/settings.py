@@ -1,5 +1,9 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from ConfigParser import RawConfigParser
+
+config = RawConfigParser()
+config.read('/etc/django_settings/settings.ini')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -8,10 +12,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'zx5olg91-6$nphzb=%-#$g&4(pana42wljc@-*xbo1-gt!o^#@'
+SECRET_KEY = config.get('Secret', 'SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config.get('Debug', 'DEBUG_STATUS')
 
 ALLOWED_HOSTS = []
 
@@ -66,8 +70,8 @@ WSGI_APPLICATION = 'holocron_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': config.get('Database', 'ENGINE'),
+        'NAME': config.get('Database', 'NAME'),
     }
 }
 
