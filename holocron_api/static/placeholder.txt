@@ -1,0 +1,1 @@
+Make sure there is a dummy Static folder for REST Framework files

@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.hostmanager.include_offline = true
   #config.vm.provision :hostmanager
   config.vm.define 'holocron-api' do |node|
-      node.vm.hostname = 'holocron-api.vagrant.com'
+      node.vm.hostname = 'holocron-api.com'
       node.vm.network :private_network, ip: '192.168.42.42'
   end
 
