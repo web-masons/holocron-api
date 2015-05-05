@@ -72,6 +72,10 @@ DATABASES = {
     'default': {
         'ENGINE': config.get('Database', 'ENGINE'),
         'NAME': config.get('Database', 'NAME'),
+        'USER': config.get('Database', 'USER'),
+        'PASSWORD': config.get('Database', 'PASSWORD'),
+        'HOST': config.get('Database', 'HOST'),
+        'PORT': '',
     }
 }
 

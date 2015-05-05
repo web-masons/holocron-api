@@ -8,8 +8,12 @@
     main_app: holocron_api
     app: api
     APACHE_LOG_DIR: /var/log/apache2
+    dbname: holocron
+    dbuser: django-test
+    dbpassword: testing
   tasks:
 
   roles:
   - { role: base }
+  - { role: db }
   - { role: django }
