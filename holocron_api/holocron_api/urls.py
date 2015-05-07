@@ -1,8 +1,19 @@
 from django.conf.urls import include, url
+from rest_framework import routers
+from api import views
+
+router = routers.DefaultRouter()
+router.register(r'campaign', views.CampaignViewSet)
+router.register(r'medium', views.MediumViewSet)
+router.register(r'source', views.SourceViewSet)
+router.register(r'content', views.ContentViewSet)
+router.register(r'placement', views.PlacementViewSet)
+router.register(r'placement-details', views.PlacementDetailsViewSet)
 
 
 
 urlpatterns = [
 
-    url(r'', 'api.views.index')
+    #url(r'', 'api.views.index'),
+    url(r'^', include(router.urls))
 ]

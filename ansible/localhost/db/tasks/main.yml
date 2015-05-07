@@ -5,6 +5,6 @@
     sudo_user: postgres
 
   - name: ensure user has access to database
-    postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL
+    postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL role_attr_flags=CREATEDB
     sudo: yes
     sudo_user: postgres
