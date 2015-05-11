@@ -11,6 +11,10 @@
     pip: name=markdown
     sudo: yes
 
+  - name: Install Factory Boy for testing
+    pip: name=factory_boy
+    sudo: yes
+
   - name: check for settings folder
     stat: path=/etc/django_settings
     register: settings_path

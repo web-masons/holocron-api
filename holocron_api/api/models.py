@@ -6,7 +6,7 @@ from django.utils import timezone
 class Campaign(models.Model):
     campaign_id = models.AutoField(primary_key=True)
     campaign_name = models.CharField(max_length=100)
-    campaign_description = models.CharField(max_length=200)
+    campaign_description = models.CharField(max_length=140)
     end_date = models.DateField('End Date')
     created_on = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -34,7 +34,7 @@ class Source(models.Model):
 class Content(models.Model):
     content_id = models.AutoField(primary_key=True)
     content_name = models.CharField(max_length=100)
-    content_description = models.CharField(max_length=200)
+    content_description = models.CharField(max_length=140)
     created_on = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     def __str__(self):
@@ -43,6 +43,7 @@ class Content(models.Model):
 class Placement(models.Model):
     placement_id = models.AutoField(primary_key=True)
     placement_name = models.CharField(max_length=100)
+    placement_url = models.CharField(max_length=100)
     end_date = models.DateField('End Date')
     created_on = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
