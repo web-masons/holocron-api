@@ -1,0 +1,34 @@
+---
+  - name: Install Django
+    pip: name=Django==1.8
+    sudo: yes
+
+  - name: Install Django REST
+    pip: name=djangorestframework
+    sudo: yes
+
+  - name: Install Markdown (for browsable API)
+    pip: name=markdown
+    sudo: yes
+
+  - name: check for settings folder
+    stat: path=/etc/django_settings
+    register: settings_path
+
+  - name: Make directory for settings file
+    command: mkdir /etc/django_settings
+    when: settings_path.stat.exists == false
+    sudo: yes
+
+  - name: Upload Settings to envrionment
+    template: src=settings.ini dest=/etc/django_settings/settings.ini
+    sudo: yes
+
+  - name: Install Whitenoise
+    pip: name=whitenoise
+    sudo: yes
+
+
+  - name: collectstatic for Django
+    django_manage: command=collectstatic app_path=/vagrant/{{ main_app }}
+
