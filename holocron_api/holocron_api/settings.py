@@ -30,8 +30,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'api'
+    'api',
+    'test_pep8'
 )
+
+REST_FRAMEWORK = {
+    # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',)
+    'PAGE_SIZE': 10
+}
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -64,6 +70,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'holocron_api.wsgi.application'
 
+PROJECT_DIR = os.path.dirname(__file__)
+TEST_PEP8_DIRS = [os.path.dirname(PROJECT_DIR), ]
+TEST_PEP8_EXCLUDE = ['migrations', ]
+
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -72,6 +82,10 @@ DATABASES = {
     'default': {
         'ENGINE': config.get('Database', 'ENGINE'),
         'NAME': config.get('Database', 'NAME'),
+        'USER': config.get('Database', 'USER'),
+        'PASSWORD': config.get('Database', 'PASSWORD'),
+        'HOST': config.get('Database', 'HOST'),
+        'PORT': '',
     }
 }
 
@@ -90,8 +104,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
@@ -105,4 +117,4 @@ STATICFILES_DIRS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
-#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
