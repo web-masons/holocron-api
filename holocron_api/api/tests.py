@@ -364,7 +364,7 @@ class PlacementAPITest(APITestCase):
     def test_post_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test Placement",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": 1,
@@ -376,7 +376,7 @@ class PlacementAPITest(APITestCase):
     def test_missing_name_placement_api(self):
         self.make_pks()
         data = {"placement_name": "",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": 1,
@@ -400,7 +400,7 @@ class PlacementAPITest(APITestCase):
     def test_missing_date_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "",
                 "campaign": 1,
                 "medium": 1,
@@ -412,7 +412,7 @@ class PlacementAPITest(APITestCase):
     def test_invalid_date_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "1-1-2010",
                 "campaign": 1,
                 "medium": 1,
@@ -424,7 +424,7 @@ class PlacementAPITest(APITestCase):
     def test_string_date_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "January 1, 2020",
                 "campaign": 1,
                 "medium": 1,
@@ -436,7 +436,7 @@ class PlacementAPITest(APITestCase):
     def test_missing_campaign_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": "",
                 "medium": 1,
@@ -448,7 +448,7 @@ class PlacementAPITest(APITestCase):
     def test_missing_medium_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": "",
@@ -460,7 +460,7 @@ class PlacementAPITest(APITestCase):
     def test_missing_source_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": 1,
@@ -472,7 +472,7 @@ class PlacementAPITest(APITestCase):
     def test_missing_content_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": 1,
@@ -484,7 +484,7 @@ class PlacementAPITest(APITestCase):
     def test_invalid_campaign_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 0,
                 "medium": 1,
@@ -496,7 +496,7 @@ class PlacementAPITest(APITestCase):
     def test_invalid_medium_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": 0,
@@ -508,7 +508,7 @@ class PlacementAPITest(APITestCase):
     def test_invalid_source_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": 1,
@@ -520,7 +520,7 @@ class PlacementAPITest(APITestCase):
     def test_invalid_content_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": 1,
@@ -532,7 +532,7 @@ class PlacementAPITest(APITestCase):
     def test_negative_campaign_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": -1,
                 "medium": 1,
@@ -544,7 +544,7 @@ class PlacementAPITest(APITestCase):
     def test_negative_medium_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": -1,
@@ -556,7 +556,7 @@ class PlacementAPITest(APITestCase):
     def test_negative_source_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": 1,
@@ -568,7 +568,7 @@ class PlacementAPITest(APITestCase):
     def test_negative_content_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": 1,
@@ -580,7 +580,7 @@ class PlacementAPITest(APITestCase):
     def test_string_campaign_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": "One",
                 "medium": 1,
@@ -592,7 +592,7 @@ class PlacementAPITest(APITestCase):
     def test_string_medium_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": "Medium",
@@ -604,7 +604,7 @@ class PlacementAPITest(APITestCase):
     def test_string_source_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": 1,
@@ -616,7 +616,7 @@ class PlacementAPITest(APITestCase):
     def test_string_content_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
-                "placement_url": "www.carbonite.com",
+                "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
                 "campaign": 1,
                 "medium": 1,
