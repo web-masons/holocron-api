@@ -15,6 +15,10 @@
     pip: name=factory_boy
     sudo: yes
 
+  - name: Install Pep 8 Testing
+    pip: name=django-test-pep8
+    sudo: yes
+
   - name: check for settings folder
     stat: path=/etc/django_settings
     register: settings_path

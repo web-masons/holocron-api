@@ -11,9 +11,6 @@ router.register(r'placement-details', views.PlacementDetailsViewSet)
 router.register(r'placement', views.PlacementViewSet)
 
 
-
 urlpatterns = [
-
-    #url(r'', 'api.views.index'),
     url(r'^', include(router.urls))
 ]

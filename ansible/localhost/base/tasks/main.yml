@@ -39,6 +39,17 @@
       service: name=apache2 state=started enabled=yes
       sudo: yes
 
+    - name: Install ufw
+      apt: name=ufw
+    - name: Allow ssh through firewall
+      ufw: proto=tcp port=22 rule=allow
+    - name: Set ufw policy
+      ufw: state=enabled direction=incoming policy=deny
+    - name: Allow apache firewall
+      ufw: proto=tcp port=80 rule=allow
+    - name: Allow apache ssl firewall
+      ufw: proto=tcp port=443 rule=allow
+
     - name: enabled mod_rewrite
       apache2_module: name=rewrite state=present
       notify:
@@ -58,12 +69,12 @@
       when: ssl_path.stat.exists == false
 
     - name: apache2 NameVirtualHost Port
-      lineinfile: dest=/etc/apache2/ports.conf regexp="^NameVirtualHost " line=" " state=present
+      lineinfile: dest=/etc/apache2/ports.conf regexp="^NameVirtualHost " line="" state=present
       notify:
         - restart apache2
 
     - name: apache2 listen on Specified Port
-      lineinfile: dest=/etc/apache2/ports.conf regexp="^Listen " line=" " state=present
+      lineinfile: dest=/etc/apache2/ports.conf regexp="^Listen " line="" state=present
       notify:
         - restart apache2
 

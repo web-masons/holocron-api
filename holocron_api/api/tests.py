@@ -7,17 +7,20 @@ from api.models import Source, Medium, Campaign, Content, Placement
 from rest_framework import status
 import factory
 
+
 class SourceFactory(factory.DjangoModelFactory):
     class Meta:
         model = Source
     source_name = "Testing Source"
     source_id = 1
 
+
 class MediumFactory(factory.DjangoModelFactory):
     class Meta:
         model = Medium
     medium_name = "Testing Medium"
     medium_id = 1
+
 
 class CampaignFactory(factory.DjangoModelFactory):
     class Meta:
@@ -27,6 +30,7 @@ class CampaignFactory(factory.DjangoModelFactory):
     end_date = "2040-12-12"
     campaign_id = 1
 
+
 class ContentFactory(factory.DjangoModelFactory):
     class Meta:
         model = Content
@@ -34,8 +38,11 @@ class ContentFactory(factory.DjangoModelFactory):
     content_description = "This is a test for Content"
     content_id = 1
 
+
 class SourceTest(APITestCase):
-    def create_test(self, source_name="Test Source"):
+
+    @staticmethod
+    def create_test(source_name="Test Source"):
         return Source.objects.create(source_name=source_name)
 
     def test_was_created(self):
@@ -44,57 +51,83 @@ class SourceTest(APITestCase):
 
 
 class MediumTest(APITestCase):
-    def create_test(self, medium_name="Test Medium"):
+
+    @staticmethod
+    def create_test(medium_name="Test Medium"):
         return Medium.objects.create(medium_name=medium_name)
 
     def test_was_created(self):
         m = self.create_test()
         self.assertTrue(isinstance(m, Medium))
 
+
 class ContentTest(APITestCase):
-    def create_test(self, content_name="Test Content", content_description="I am a piece of Content!"):
-        return Content.objects.create(content_name=content_name, content_description=content_description)
+
+    @staticmethod
+    def create_test(content_name="Test Content",
+                    content_description="I am a piece of Content!"):
+        return Content.objects.create(content_name=content_name,
+                                      content_description=content_description)
 
     def test_was_created(self):
         co = self.create_test()
         self.assertTrue(isinstance(co, Content))
 
+
 class CampaignTest(APITestCase):
-    def create_test(self, campaign_name="Test Campaign", campaign_description="I am a test Campaign",
+
+    @staticmethod
+    def create_test(campaign_name="Test Campaign",
+                    campaign_desc="I am a test Campaign",
                     end_date="2020-09-20"):
-        return Campaign.objects.create(campaign_name=campaign_name, campaign_description=campaign_description,
+        return Campaign.objects.create(campaign_name=campaign_name,
+                                       campaign_description=campaign_desc,
                                        end_date=end_date)
 
     def test_was_created(self):
         ca = self.create_test()
         self.assertTrue(isinstance(ca, Campaign))
 
+
 class PlacementTest(APITestCase):
-    def create_campaign_test(self, campaign_name="Test Campaign", campaign_description="I am a test Campaign",
+
+    @staticmethod
+    def create_campaign_test(campaign_name="Test Campaign",
+                             campaign_desc="I am a test Campaign",
                              end_date="2020-09-20"):
-        return Campaign.objects.create(campaign_name=campaign_name, campaign_description=campaign_description,
+        return Campaign.objects.create(campaign_name=campaign_name,
+                                       campaign_description=campaign_desc,
                                        end_date=end_date)
 
-    def create_medium_test(self, medium_name="Test Medium"):
+    @staticmethod
+    def create_medium_test(medium_name="Test Medium"):
         return Medium.objects.create(medium_name=medium_name)
 
-    def create_source_test(self, source_name="Test Source"):
+    @staticmethod
+    def create_source_test(source_name="Test Source"):
         return Source.objects.create(source_name=source_name)
 
-    def create_content_test(self, content_name="Test Content", content_description="I am a piece of Content!"):
-        return Content.objects.create(content_name=content_name, content_description=content_description)
+    @staticmethod
+    def create_content_test(content_name="Test Content",
+                            content_description="I am a piece of Content!"):
+        return Content.objects.create(content_name=content_name,
+                                      content_description=content_description)
 
-    def create_test(self, placement_name="Test Placement", end_date="2020-09-20"):
+    @staticmethod
+    def create_test(self, placement_name="Test Placement",
+                    end_date="2020-09-20"):
         ca = self.create_campaign_test()
         m = self.create_medium_test()
         s = self.create_source_test()
         co = self.create_content_test()
-        return Placement.objects.create(placement_name=placement_name, end_date=end_date, campaign=ca, medium=m,
-                                        source=s, content=co)
+        return Placement.objects.create(placement_name=placement_name,
+                                        end_date=end_date, campaign=ca,
+                                        medium=m, source=s, content=co)
 
     def test_was_created(self):
-        p = self.create_test()
+        p = self.create_test(self)
         self.assertTrue(isinstance(p, Placement))
+
 
 class SourceAPITest(APITestCase):
     def test_post_source_api(self):
@@ -123,10 +156,12 @@ class SourceAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_too_long_post_source_api(self):
-        data = {'source_name': 'Random o85y9384ytoerty3849yroehg yhvytvytoa8y4tyv8ytoeryto8y34o8ythiua48ytlai4ytai47tyi'
-                               'ow4t8orghowiy4toi4ehtoweit'}
+        data = {'source_name': 'Random o85y9384ytoerty3849yroehg '
+                               'yhvytvytoa8y4tyv8ytoeryto8y34o8ythiua48y'
+                               'tlai4ytai47tyiow4t8orghowiy4toi4ehtoweit'}
         response = self.client.post('/source/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
 
 class MediumAPITest(APITestCase):
     def test_post_medium_api(self):
@@ -155,10 +190,12 @@ class MediumAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_too_long_post_medium_api(self):
-        data = {'medium_name': 'Random o85y9384ytoerty3849yroehg yhvytvytoa8y4tyv8ytoeryto8y34o8ythiua48ytlai4ytai47ty'
-                               'iow4t8orghowiy4toi4ehtoweit'}
+        data = {'medium_name': 'Random o85y9384ytoerty3849yroehg '
+                               'yhvytvytoa8y4tyv8ytoeryto8y34o8ythiu'
+                               'a48ytlai4ytai47tyiow4t8orghowiy4toi4ehtoweit'}
         response = self.client.post('/medium/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
 
 class CampaignAPITest(APITestCase):
     def test_post_campaign_api(self):
@@ -232,7 +269,8 @@ class CampaignAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_name_too_long_post_campaign_api(self):
-        data = {'campaign_name': 'Random o85y9384ytoerty3849yroehg yhvytvytoa8y4tyv8ytoeryto8y34o8ythiua48ytlai4ytai47t'
+        data = {'campaign_name': 'Random o85y9384ytoerty3849yroehg yhvytvyto'
+                                 'a8y4tyv8ytoeryto8y34o8ythiua48ytlai4ytai47t'
                                  'yiow4t8orghowiy4toi4ehtoweit',
                 'campaign_description': 'This one is mine',
                 'end_date': '2020-12-12'}
@@ -241,11 +279,14 @@ class CampaignAPITest(APITestCase):
 
     def test_description_too_long_post_campaign_api(self):
         data = {'campaign_name': 'Long Description',
-                'campaign_description': 'What happens if this is too long srihgoityow aiytowierhtohirgoirytiorhgohe;'
-                                        'ao4yhtoaghrihat;oeirhtahlhghe sifghoirhgeoirhgeilrgherigheirfklnvhdlfiorhge',
+                'campaign_description': 'What happens if this is too long '
+                                        'srihgoityow aiytowierhtohirgoirytiors'
+                                        'hgoheao4yhtoaghrihat;oeirhtahlhghe sf'
+                                        'sifghoirhgeoirhgeilrgherigheirfklnvh',
                 'end_date': '2020-12-12'}
         response = self.client.post('/campaign/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
 
 class ContentAPITest(APITestCase):
     def test_post_content_api(self):
@@ -283,22 +324,28 @@ class ContentAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_name_too_long_post_content_api(self):
-        data = {'content_name': 'Random o85y9384ytoerty3849yroehg yhvytvytoa8y4tyv8ytoeryto8y34o8ythiua48ytlai4ytai'
-                                '47tyiow4t8orghowiy4toi4ehto',
+        data = {'content_name': 'Random o85y9384ytoerty3849yroehg '
+                                'yhvytvytoa8y4tyv8ytoeryto8y34o8ythi'
+                                'ua48ytlai4ytai47tyiow4t8orghowiy4toi4ehto',
                 'content_description': 'Name is too long'}
         response = self.client.post('/content/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_description_too_long_post_content_api(self):
         data = {'content_name': 'Description is too long',
-                'content_description': 'This is too long. lsirghotyeiyrtoeirhgtoeitoeuto94uti ioeartoeirhto eheoihteoit'
-                                       'hoeihtaoeirhteoirhtoei heoirt woirygoeirfhgvoeirshgeoishg iohrgoeirhgoeirhg'}
+                'content_description': 'This is too long. '
+                                       'lsirghotyeiyrtoeirhgtoeitoeuto94uti '
+                                       'ioeartoeirhto eheoihteoit'
+                                       'hoeihtaoeirhteoirhtoei heoirt '
+                                       'woirygoeirfhgvoeirshgeoishgsjdfhskjd'}
         response = self.client.post('/content/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+
 class PlacementAPITest(APITestCase):
 
-    def make_pks(self):
+    @staticmethod
+    def make_pks():
         SourceFactory.create()
         MediumFactory.create()
         CampaignFactory.create()
@@ -577,7 +624,3 @@ class PlacementAPITest(APITestCase):
                 "content": "My Content"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
-
-
-
