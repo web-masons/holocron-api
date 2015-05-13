@@ -1,7 +1,8 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -13,7 +14,6 @@ SECRET_KEY = 'NOT_SO_SECRET_KEY'
 DEBUG = False
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -65,8 +65,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'holocron_api.wsgi.application'
 
-PROJECT_DIR = os.path.dirname(__file__)
-TEST_PEP8_DIRS = [os.path.dirname(PROJECT_DIR), ]
+TEST_PEP8_DIRS = [BASE_DIR, ]
 TEST_PEP8_EXCLUDE = ['migrations', ]
 
 
@@ -102,7 +101,7 @@ STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, '../static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 # Simplified static file serving.
