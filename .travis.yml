@@ -10,8 +10,8 @@ install:
   - pip install -q coveralls
 before_script:
   - flake8 --exclude 'migrations' --max-complexity 10 holocron_api
-  - ./holocron_api/manage.py makemigrations
-  - ./holocron_api/manage.py migrate
+  - python ./holocron_api/manage.py makemigrations
+  - python ./holocron_api/manage.py migrate
 script:
   coverage run --source=holocron_api ./holocron_api/manage.py test api
 after_success:
