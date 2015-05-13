@@ -1,8 +1,5 @@
-from django.core.urlresolvers import reverse
-from rest_framework import status
 from rest_framework.test import APITestCase
 from rest_framework.test import APIClient
-from django.test import TestCase
 from api.models import Source, Medium, Campaign, Content, Placement
 from rest_framework import status
 import factory

@@ -1,7 +1,3 @@
-from django.shortcuts import render
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
 from api.models import Source, Medium, Campaign, Content, Placement
 from rest_framework import viewsets
 from api.serializers import SourceSerializer, MediumSerializer, \

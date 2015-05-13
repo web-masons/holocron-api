@@ -75,8 +75,8 @@ TEST_PEP8_EXCLUDE = ['migrations', ]
 
 DATABASES = {
     'default': {
-       'NAME': 'holocron-api.db',
-       'ENGINE': 'django.db.backends.sqlite3'
+        'NAME': 'holocron-api.db',
+        'ENGINE': 'django.db.backends.sqlite3'
     }
 }
 
