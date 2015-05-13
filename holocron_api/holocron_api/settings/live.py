@@ -1,9 +1,10 @@
-from base import *  #noqa
+from base import *  # noqa
 import os
 
 DEBUG = False
 
 from django.core.exceptions import ImproperlyConfigured
+
 
 def get_env_variable(var_name):
     try:
