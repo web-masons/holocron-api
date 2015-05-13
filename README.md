@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/asagage/holocron-api.svg?branch=build-pipeline)](https://travis-ci.org/asagage/holocron-api)
-[![Coverage Status](https://coveralls.io/repos/asagage/holocron-api/badge.svg)](https://coveralls.io/r/asagage/holocron-api)
-[![Code Climate](https://codeclimate.com/github/asagage/holocron-api/badges/gpa.svg)](https://codeclimate.com/github/asagage/holocron-api)
+[![Build Status](https://travis-ci.org/web-masons/holocron-api.svg)](https://travis-ci.org/web-masons/holocron-api)
+[![Coverage Status](https://coveralls.io/repos/web-masons/holocron-api/badge.svg)](https://coveralls.io/r/web-masons/holocron-api)
+[![Code Climate](https://codeclimate.com/github/web-masons/holocron-api/badges/gpa.svg)](https://codeclimate.com/github/web-masons/holocron-api)
 # holocron-api
  
  
