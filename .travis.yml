@@ -2,21 +2,43 @@ language: python
 python:
   - "2.7"
 env:
-  - DJANGO=1.8 DJANGO_SETTINGS_MODULE="holocron_api.settings.travis"
+  global:
+    - DJANGO_SETTINGS_MODULE="holocron_api.settings.travis"
+    - PROJECT_ROOT=`pwd`
+    - secure: "g1KDrcMYsgcp/Psynj8Eqb9D1DFqmQTHm8qd6HmlJUaEmAnkcLgImHi/rMmiNGh3UATliiJIi9rbNTYIS8L1yH23BLM1usjQmxRVoymI/7aUqW4AbbHvkcabaSMNtcYTrU524z7ggPsoCIdMip5fRXaZoDkbSUkNoKk3Icx5MkA="
+  matrix:
+    - DJANGO=1.8
+before_install:
+  - sudo apt-get -y update
+  - echo "Update packages and configuration."
 install:
+  - echo "Install Build Dependencies Here"
   - pip install -q Django==$DJANGO
   - pip install -r requirements.txt
   - pip install -q flake8
   - pip install -q coveralls
 before_script:
+  - echo "Navigate to Test Suite"
   - flake8 --exclude 'migrations' --max-complexity 10 holocron_api
   - psql -c 'create database travis_ci_test;' -U postgres
   - python ./holocron_api/manage.py makemigrations
   - python ./holocron_api/manage.py migrate
 script:
-  coverage run --source=holocron_api ./holocron_api/manage.py test api
+  - echo "Run Tests Here"
+  - coverage run --source=holocron_api ./holocron_api/manage.py test api
 after_success:
-  coveralls
+  - echo "Build Successful"
+  - coveralls
+  - sudo apt-get -y install golang
+  - cd ..
+  - mkdir mygo
+  - export GOPATH=`pwd`/mygo
+  - go get github.com/hashicorp/atlas-upload-cli
+  - cd $GOPATH/src/github.com/hashicorp/atlas-upload-cli/
+  - make
+  - ls -la $PROJECT_ROOT
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && ./bin/atlas-upload carbonite/holocron-api $PROJECT_ROOT || false'
+
 
 # Whitelisting branches
 # branches:

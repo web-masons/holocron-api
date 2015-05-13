@@ -5,15 +5,15 @@
     http_port: 443
     domain: holocron-api.com
     project: holocron-api
-    app_path: /vagrant/holocron_api
+    app_path: /holocron-api/holocron_api
     app: api
     APACHE_LOG_DIR: /var/log/apache2
     dbname: holocron
     dbuser: django-test
     dbpassword: testing
+    dbpassword_env: "{{ lookup('env','HOLOCRON_DB_PASS') }}"
   tasks:
 
   roles:
   - { role: base }
-  - { role: db }
   - { role: django }

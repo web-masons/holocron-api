@@ -19,24 +19,9 @@
     pip: name=django-test-pep8
     sudo: yes
 
-  - name: check for settings folder
-    stat: path=/etc/django_settings
-    register: settings_path
-
-  - name: Make directory for settings file
-    command: mkdir /etc/django_settings
-    when: settings_path.stat.exists == false
-    sudo: yes
-
-  - name: Upload Settings to envrionment
-    template: src=settings.ini dest=/etc/django_settings/settings.ini
-    sudo: yes
-
   - name: Install Whitenoise
     pip: name=whitenoise
     sudo: yes
 
-
   - name: collectstatic for Django
-    django_manage: command=collectstatic app_path=/vagrant/{{ main_app }}
-
+    django_manage: command=collectstatic app_path={{ app_path }}
