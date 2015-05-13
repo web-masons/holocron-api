@@ -16,6 +16,6 @@ sys.path.append('/vagrant/holocron_api')
 sys.path.append('/vagrant/holocron_api/holocron-api')
 sys.path.append('/vagrant/holocron_api/api')
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "holocron_api.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "holocron_api.settings.local")
 
 application = get_wsgi_application()

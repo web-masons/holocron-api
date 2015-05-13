@@ -1,24 +1,19 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from ConfigParser import RawConfigParser
 
-config = RawConfigParser()
-config.read('/etc/django_settings/settings.ini')
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config.get('Secret', 'SECRET_KEY')
+SECRET_KEY = 'NOT_SO_SECRET_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config.get('Debug', 'DEBUG_STATUS')
+DEBUG = False
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -70,8 +65,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'holocron_api.wsgi.application'
 
-PROJECT_DIR = os.path.dirname(__file__)
-TEST_PEP8_DIRS = [os.path.dirname(PROJECT_DIR), ]
+TEST_PEP8_DIRS = [BASE_DIR, ]
 TEST_PEP8_EXCLUDE = ['migrations', ]
 
 
@@ -80,12 +74,8 @@ TEST_PEP8_EXCLUDE = ['migrations', ]
 
 DATABASES = {
     'default': {
-        'ENGINE': config.get('Database', 'ENGINE'),
-        'NAME': config.get('Database', 'NAME'),
-        'USER': config.get('Database', 'USER'),
-        'PASSWORD': config.get('Database', 'PASSWORD'),
-        'HOST': config.get('Database', 'HOST'),
-        'PORT': '',
+        'NAME': 'holocron-api.db',
+        'ENGINE': 'django.db.backends.sqlite3'
     }
 }
 
