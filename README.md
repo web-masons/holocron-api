@@ -12,13 +12,16 @@
  2. <p>cd to /holocron_api folder, where Vagrantile is located </p>
  <p>      -Note: If not already created, create "settings.ini" file inside of /ansible/localhost.  A template is provided.
  3. <p><code> vagrant up </code> </p>
- 4. <p>SSH into your vagrant environment and go to your django folder where manage.py exists. 
+ 4. <p> SSH into your vagrant environment and go to your django folder where manage.py exists. 
  Setup the database by running <code>python manage.py makemigrations</code>
- followed by <code>python manage.py migrate</code>
- 5. View test API at https://holocron-api.com/
+ followed by <code>python manage.py migrate</code> </p>
+ 5. <p> View test API at https://holocron-api.com/ </p>
+ 6. <p><i> Note: /placement-details/ does not display correctly at root.  This is a Django rest bug.  The url itself does still work. </i></p>
     
 <i>(In progress...)</i>
 
  <h2>To Run tests</h2>
  <p> <code> python manage.py test  </code>  - Run from main app folder in vagrant box where <i>manage.py</i> is present.
  - This will run both the unit tests as well as the PEP 8 tests.</p>
+ 
+ 

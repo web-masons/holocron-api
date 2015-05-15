@@ -132,6 +132,11 @@ class SourceAPITest(APITestCase):
         response = self.client.post('/source/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    def test_post_sql_source_api(self):
+        data = {'source_name': 'DROP TABLE *'}
+        response = self.client.post('/source/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
     def test_get_source_api(self):
         client = APIClient()
         response = client.get("/source/")
@@ -163,6 +168,11 @@ class SourceAPITest(APITestCase):
 class MediumAPITest(APITestCase):
     def test_post_medium_api(self):
         data = {'medium_name': 'My Meduim'}
+        response = self.client.post('/medium/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_post_sql_medium_api(self):
+        data = {'medium_name': 'DROP TABLE *'}
         response = self.client.post('/medium/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
@@ -198,6 +208,13 @@ class CampaignAPITest(APITestCase):
     def test_post_campaign_api(self):
         data = {'campaign_name': 'My Campaign',
                 'campaign_description': 'This one is mine',
+                'end_date': '2020-12-12'}
+        response = self.client.post('/campaign/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_post_sql_campaign_api(self):
+        data = {'campaign_name': 'DROP TABLE *',
+                'campaign_description': 'DROP TABLE *',
                 'end_date': '2020-12-12'}
         response = self.client.post('/campaign/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -288,6 +305,12 @@ class CampaignAPITest(APITestCase):
 class ContentAPITest(APITestCase):
     def test_post_content_api(self):
         data = {'content_name': 'My Content',
+                'content_description': 'This is my content'}
+        response = self.client.post('/content/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_post_sql_content_api(self):
+        data = {'content_name': 'DROP TABLE *',
                 'content_description': 'This is my content'}
         response = self.client.post('/content/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
