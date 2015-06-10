@@ -1,6 +1,7 @@
 from rest_framework.test import APITestCase
 from rest_framework.test import APIClient
-from api.models import Source, Medium, Campaign, Creative, Placement, LOB, Intent, LifeCycle, Audience
+from api.models import Source, Medium, Campaign, Creative, \
+    LOB, Intent, LifeCycle, Audience
 from rest_framework import status
 import factory
 
@@ -95,9 +96,9 @@ class CreativeTest(APITestCase):
 
     @staticmethod
     def create_test(creative_name="Test Content",
-                    creative_description="I am a piece of Content!"):
+                    creative_desc="I am a piece of Content!"):
         return Creative.objects.create(creative_name=creative_name,
-                                       creative_description=creative_description)
+                                       creative_description=creative_desc)
 
     def test_was_created(self):
         cr = self.create_test()

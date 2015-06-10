@@ -59,13 +59,19 @@ class PlacementSerializer(serializers.ModelSerializer):
 
     def get_generated_url(self, obj):
         if obj.catid is not None:
-            return string_concat(obj.placement_url, "?utm_campaign=", obj.campaign, "&utm_source=", obj.source,
-                                 "&utm_medium=", obj.medium, "&utm_content=", obj.placement_id,
-                                 "&catid=", obj.catid, "&c3ch=", obj.medium, "&c3nid=", obj.placement_id)
+            return string_concat(obj.placement_url, "?utm_campaign=",
+                                 obj.campaign, "&utm_source=", obj.source,
+                                 "&utm_medium=", obj.medium, "&utm_content=",
+                                 obj.placement_id, "&catid=", obj.catid,
+                                 "&c3ch=", obj.medium, "&c3nid=",
+                                 obj.placement_id)
         else:
-            return string_concat(obj.placement_url, "?utm_campaign=", obj.campaign, "&utm_source=", obj.source,
-                                 "&utm_medium=", obj.medium, "&utm_content=", obj.placement_id,
-                                 "&c3ch=", obj.medium, "&c3nid=", obj.placement_id)
+            return string_concat(obj.placement_url, "?utm_campaign=",
+                                 obj.campaign, "&utm_source=", obj.source,
+                                 "&utm_medium=", obj.medium,
+                                 "&utm_content=", obj.placement_id,
+                                 "&c3ch=", obj.medium, "&c3nid=",
+                                 obj.placement_id)
 
 
 class PlacementDetailsSerializer(serializers.ModelSerializer):

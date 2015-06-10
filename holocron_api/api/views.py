@@ -1,4 +1,5 @@
-from api.models import Source, Medium, Campaign, Creative, Placement, LOB, Intent, LifeCycle, Audience
+from api.models import Source, Medium, Campaign, Creative, \
+    Placement, LOB, Intent, LifeCycle, Audience
 from rest_framework import viewsets
 from api.serializers import SourceSerializer, MediumSerializer, \
     CampaignSerializer, CreativeSerializer, PlacementSerializer, \
@@ -37,12 +38,14 @@ class CreativeViewSet(viewsets.ModelViewSet):
     queryset = Creative.objects.all()
     serializer_class = CreativeSerializer
 
+
 class LOBViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Line of Business to be viewed or edited.
     """
     queryset = LOB.objects.all()
     serializer_class = LOBSerializer
+
 
 class IntentViewSet(viewsets.ModelViewSet):
     """
@@ -51,12 +54,14 @@ class IntentViewSet(viewsets.ModelViewSet):
     queryset = Intent.objects.all()
     serializer_class = IntentSerializer
 
+
 class LifeCycleViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Content to be viewed or edited.
     """
     queryset = LifeCycle.objects.all()
     serializer_class = LifeCycleSerializer
+
 
 class AudienceViewSet(viewsets.ModelViewSet):
     """
