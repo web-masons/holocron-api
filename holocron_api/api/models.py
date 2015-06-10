@@ -113,4 +113,3 @@ class Placement(models.Model):
 
     def still_running(self):
         return self.end_date >= timezone.now()
-
