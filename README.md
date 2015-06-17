@@ -74,3 +74,39 @@
     end_date = Date
     created_on = Date and Time
     updated = Date and Time
+    
+<h1>Custom Attributes Models and Fields<h1>
+ <h2>Intent</h2>
+ 
+    intent_key = Slug (PK)
+    intent_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
+    placements = List of Placements
+    
+ <h2>Audience</h2>
+ 
+    audience_key = Slug (PK)
+    audience_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
+    placements = List of Placements
+    
+ <h2>Lifecycle</h2>
+ 
+    lifecycle_key = Slug (PK)
+    lifecycle_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
+    placements = List of Placements
+    
+ <h2>LOB</h2>
+ 
+    lob_key = Slug (PK)
+    lob_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
+    placements = List of Placements
+
+
+
