@@ -35,12 +35,12 @@
     
     updated = Date and Time
  <h2>Medium</h2>
- <p>
+
     medium_key = Slug (Max Length = 100 characters, PK)
     medium_name = String (Max Length = 100)
     created_on = Date and Time
     updated = Date and Time
- </p>
+
  <h2>Creative</h2>
     creative_id = Auto Incrementing ID (PK)
     creative_name = String (Max Length = 100)
