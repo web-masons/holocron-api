@@ -24,30 +24,33 @@
  <p> <code> python manage.py test  </code>  - Run from main app folder in vagrant box where <i>manage.py</i> is present.
  - This will run both the unit tests as well as the PEP 8 tests.</p>
  
- <h1>Models and fields</h1>
+---
+ 
+<h1>Standard Models and fields</h1>
  <h2>Source</h2>
- <code>
+ 
     source_key = Slug (Max Length = 100 characters, PK)
     source_name = String (Max Length = 100)
     created_on = Date and Time
     updated = Date and Time
- </code>
+    
  <h2>Medium</h2>
- <code>
+
     medium_key = Slug (Max Length = 100 characters, PK)
     medium_name = String (Max Length = 100)
     created_on = Date and Time
- </code>
+    updated = Date and Time
+
  <h2>Creative</h2>
- <code>
+ 
     creative_id = Auto Incrementing ID (PK)
     creative_name = String (Max Length = 100)
     creative_description = String (Max Length = 140)
     created_on = Date and Time
     updated = Date and Time
- </code>
+
  <h2>Campaign</h2>
- <code>
+
     campaign_key = Slug (Max Length = 100 characters, PK)
     campaign_name = String (Max Length = 100)
     campaign_description = String (Max Length = 140)
@@ -55,9 +58,10 @@
     campaign_notes = String (Max Length = 140, optional)
     end_date = Date
     created_on = Date and Time
- </code>
+    updated = Date and Time
+
  <h2>Placement</h2>
- <code>
+
     placement_id = Auto Incrementing ID (PK)
     placement_name = String (Max Length = 100)
     placement_url = String (Max Length = 100)
@@ -70,4 +74,39 @@
     end_date = Date
     created_on = Date and Time
     updated = Date and Time
- </code>
+    
+<h1>Custom Attributes Models and Fields<h1>
+ <h2>Intent</h2>
+ 
+    intent_key = Slug (PK)
+    intent_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
+    placements = List of Placements
+    
+ <h2>Audience</h2>
+ 
+    audience_key = Slug (PK)
+    audience_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
+    placements = List of Placements
+    
+ <h2>Lifecycle</h2>
+ 
+    lifecycle_key = Slug (PK)
+    lifecycle_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
+    placements = List of Placements
+    
+ <h2>LOB</h2>
+ 
+    lob_key = Slug (PK)
+    lob_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
+    placements = List of Placements
+
+
+
