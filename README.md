@@ -24,10 +24,8 @@
  <p> <code> python manage.py test  </code>  - Run from main app folder in vagrant box where <i>manage.py</i> is present.
  - This will run both the unit tests as well as the PEP 8 tests.</p>
  
- <h1>Models and fields</h1>
+<h1>Models and fields</h1>
  <h2>Source</h2>
- <p>
- 
     source_key = Slug (Max Length = 100 characters, PK)
     
     source_name = String (Max Length = 100)
@@ -35,7 +33,6 @@
     created_on = Date and Time
     
     updated = Date and Time
- </p>
  <h2>Medium</h2>
  <p>
     medium_key = Slug (Max Length = 100 characters, PK)
