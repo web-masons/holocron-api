@@ -131,6 +131,7 @@ class SourceAPITest(APITestCase):
         response = self.client.post('/source/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    # Testing sql injection is cast to String
     def test_post_sql_source_api(self):
         data = {'source_name': 'DROP TABLE *',
                 'source_key': 'TestSource'}
@@ -402,10 +403,6 @@ class PlacementAPITest(APITestCase):
         MediumFactory.create()
         CampaignFactory.create()
         CreativeFactory.create()
-        LOBFactory.create()
-        IntentFactory.create()
-        LifeCycleFactory.create()
-        AudienceFactory.create()
 
     def test_get_placement_api(self):
         client = APIClient()
@@ -427,10 +424,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": None,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -445,10 +438,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -463,10 +452,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -481,10 +466,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -499,10 +480,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -517,10 +494,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -535,10 +508,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -553,10 +522,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -571,10 +536,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -589,10 +550,6 @@ class PlacementAPITest(APITestCase):
                 "source": "",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -607,10 +564,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": "",
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -625,10 +578,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -643,10 +592,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -661,10 +606,6 @@ class PlacementAPITest(APITestCase):
                 "source": 0,
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -679,10 +620,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 0,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -697,10 +634,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -715,10 +648,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -733,10 +662,6 @@ class PlacementAPITest(APITestCase):
                 "source": -1,
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -751,10 +676,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": -1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -769,10 +690,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -787,10 +704,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -805,10 +718,6 @@ class PlacementAPITest(APITestCase):
                 "source": 1,
                 "creative": 1,
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -823,10 +732,6 @@ class PlacementAPITest(APITestCase):
                 "source": "TestingSource",
                 "creative": "My Content",
                 "catid": 12345,
-                "lob": "Test",
-                "intent": "Test_Intent",
-                "lifecycle": "TestLC",
-                "audience": "Test_Audience",
                 "jira_ticket": "AN-154"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
