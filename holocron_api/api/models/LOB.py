@@ -1,6 +1,7 @@
 from django.db import models
 from standard import Placement
 
+
 class LOB(models.Model):
     lob_key = models.SlugField(primary_key=True)
     lob_description = models.CharField(max_length=140)
