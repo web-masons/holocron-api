@@ -26,28 +26,21 @@
  
  <h1>Models and fields</h1>
  <h2>Source</h2>
- <p>
     source_key = Slug (Max Length = 100 characters, PK)
     source_name = String (Max Length = 100)
     created_on = Date and Time
     updated = Date and Time
- </p>
  <h2>Medium</h2>
- <p>
     medium_key = Slug (Max Length = 100 characters, PK)
     medium_name = String (Max Length = 100)
     created_on = Date and Time
-    updated = Date and Time
- </p>
  <h2>Creative</h2>
     creative_id = Auto Incrementing ID (PK)
     creative_name = String (Max Length = 100)
     creative_description = String (Max Length = 140)
     created_on = Date and Time
     updated = Date and Time
- </p>
  <h2>Campaign</h2>
- <p>
     campaign_key = Slug (Max Length = 100 characters, PK)
     campaign_name = String (Max Length = 100)
     campaign_description = String (Max Length = 140)
@@ -55,10 +48,7 @@
     campaign_notes = String (Max Length = 140, optional)
     end_date = Date
     created_on = Date and Time
-    updated = Date and Time
- </p>
  <h2>Placement</h2>
- <p>
     placement_id = Auto Incrementing ID (PK)
     placement_name = String (Max Length = 100)
     placement_url = String (Max Length = 100)
@@ -71,7 +61,6 @@
     end_date = Date
     created_on = Date and Time
     updated = Date and Time
- </p>
     
  
  
