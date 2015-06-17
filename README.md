@@ -24,7 +24,9 @@
  <p> <code> python manage.py test  </code>  - Run from main app folder in vagrant box where <i>manage.py</i> is present.
  - This will run both the unit tests as well as the PEP 8 tests.</p>
  
-<h1>Models and fields</h1>
+---
+ 
+<h1>Standard Models and fields</h1>
  <h2>Source</h2>
  
     source_key = Slug (Max Length = 100 characters, PK)
