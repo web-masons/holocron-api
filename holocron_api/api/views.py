@@ -1,6 +1,6 @@
 from api.models import *  # noqa
 from rest_framework import viewsets
-from api.serializers import *  #noqa
+from api.serializers import *  # noqa
 
 
 class CampaignViewSet(viewsets.ModelViewSet):
