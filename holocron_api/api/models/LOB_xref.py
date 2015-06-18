@@ -3,6 +3,7 @@ from django.utils.translation import string_concat
 from standard import Placement
 from LOB import LOB
 
+
 class LOB_xref(models.Model):
     lob_key = models.ForeignKey(LOB)
     p_key = models.OneToOneField(Placement)

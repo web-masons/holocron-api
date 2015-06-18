@@ -1,5 +1,4 @@
 from django.db import models
-from standard import Placement
 
 
 class LOB(models.Model):

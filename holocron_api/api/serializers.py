@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import *
+from api.models import *  # noqa
 from django.utils.translation import string_concat
 
 
@@ -41,6 +41,7 @@ class IntentSerializer(serializers.ModelSerializer):
 class AudienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Audience
+
 
 class LOB_xref_Serializer(serializers.ModelSerializer):
     class Meta:
