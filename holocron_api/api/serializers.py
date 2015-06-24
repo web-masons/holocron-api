@@ -1,13 +1,5 @@
 from rest_framework import serializers
-from api.models import Campaign
-from api.models import Medium
-from api.models import Source
-from api.models import Creative
-from api.models import LOB
-from api.models import LifeCycle
-from api.models import Intent
-from api.models import Audience
-from api.models import Placement
+from api.models import *  # noqa
 from django.utils.translation import string_concat
 
 
@@ -49,6 +41,26 @@ class IntentSerializer(serializers.ModelSerializer):
 class AudienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Audience
+
+
+class LOB_xref_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = LOB_xref
+
+
+class LifeCycle_xref_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lifecycle_xref
+
+
+class Intent_xref_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Intent_xref
+
+
+class Audience_xref_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Audience_xref
 
 
 class PlacementSerializer(serializers.ModelSerializer):

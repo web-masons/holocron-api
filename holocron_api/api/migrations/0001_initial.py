@@ -20,6 +20,13 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='Audience_xref',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('a_key', models.ForeignKey(to='api.Audience')),
+            ],
+        ),
+        migrations.CreateModel(
             name='Campaign',
             fields=[
                 ('campaign_key', models.SlugField(max_length=100, serialize=False, primary_key=True)),
@@ -52,6 +59,13 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='Intent_xref',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('i_key', models.ForeignKey(to='api.Intent')),
+            ],
+        ),
+        migrations.CreateModel(
             name='LifeCycle',
             fields=[
                 ('lifecycle_key', models.SlugField(serialize=False, primary_key=True)),
@@ -61,12 +75,26 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='Lifecycle_xref',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('lc_key', models.ForeignKey(to='api.LifeCycle')),
+            ],
+        ),
+        migrations.CreateModel(
             name='LOB',
             fields=[
                 ('lob_key', models.SlugField(serialize=False, primary_key=True)),
                 ('lob_description', models.CharField(max_length=140)),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='LOB_xref',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('lob_key', models.ForeignKey(to='api.LOB')),
             ],
         ),
         migrations.CreateModel(
@@ -85,16 +113,12 @@ class Migration(migrations.Migration):
                 ('placement_name', models.CharField(max_length=100)),
                 ('placement_url', models.CharField(max_length=100)),
                 ('catid', models.IntegerField(null=True, blank=True)),
+                ('jira_ticket', models.CharField(default=b'', max_length=20, blank=True)),
                 ('end_date', models.DateField(verbose_name=b'End Date')),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
-                ('jira_ticket', models.CharField(default=b'', max_length=20, blank=True)),
-                ('audience', models.ForeignKey(to='api.Audience', blank=True)),
                 ('campaign', models.ForeignKey(to='api.Campaign')),
                 ('creative', models.ForeignKey(to='api.Creative')),
-                ('intent', models.ForeignKey(to='api.Intent', blank=True)),
-                ('lifecycle', models.ForeignKey(to='api.LifeCycle', blank=True)),
-                ('lob', models.ForeignKey(to='api.LOB', blank=True)),
                 ('medium', models.ForeignKey(to='api.Medium')),
             ],
         ),
@@ -111,5 +135,25 @@ class Migration(migrations.Migration):
             model_name='placement',
             name='source',
             field=models.ForeignKey(to='api.Source'),
+        ),
+        migrations.AddField(
+            model_name='lob_xref',
+            name='p_key',
+            field=models.OneToOneField(to='api.Placement'),
+        ),
+        migrations.AddField(
+            model_name='lifecycle_xref',
+            name='p_key',
+            field=models.OneToOneField(to='api.Placement'),
+        ),
+        migrations.AddField(
+            model_name='intent_xref',
+            name='p_key',
+            field=models.OneToOneField(to='api.Placement'),
+        ),
+        migrations.AddField(
+            model_name='audience_xref',
+            name='p_key',
+            field=models.OneToOneField(to='api.Placement'),
         ),
     ]

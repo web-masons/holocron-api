@@ -1,10 +1,6 @@
-from api.models import Source, Medium, Campaign, Creative, \
-    Placement, LOB, Intent, LifeCycle, Audience
+from api.models import *  # noqa
 from rest_framework import viewsets
-from api.serializers import SourceSerializer, MediumSerializer, \
-    CampaignSerializer, CreativeSerializer, PlacementSerializer, \
-    PlacementDetailsSerializer, LOBSerializer, IntentSerializer, \
-    AudienceSerializer, LifeCycleSerializer
+from api.serializers import *  # noqa
 
 
 class CampaignViewSet(viewsets.ModelViewSet):
@@ -69,6 +65,38 @@ class AudienceViewSet(viewsets.ModelViewSet):
     """
     queryset = Audience.objects.all()
     serializer_class = AudienceSerializer
+
+
+class LOB_xref_ViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Line of Business to be viewed or edited.
+    """
+    queryset = LOB_xref.objects.all()
+    serializer_class = LOB_xref_Serializer
+
+
+class Intent_xref_ViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Content to be viewed or edited.
+    """
+    queryset = Intent_xref.objects.all()
+    serializer_class = Intent_xref_Serializer
+
+
+class LifeCycle_xref_ViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Content to be viewed or edited.
+    """
+    queryset = Lifecycle_xref.objects.all()
+    serializer_class = LifeCycle_xref_Serializer
+
+
+class Audience_xref_ViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Content to be viewed or edited.
+    """
+    queryset = Audience_xref.objects.all()
+    serializer_class = Audience_xref_Serializer
 
 
 class PlacementViewSet(viewsets.ModelViewSet):
