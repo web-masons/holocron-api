@@ -82,7 +82,6 @@
     intent_description = String (Max Length = 140)
     created_on = Date and Time
     updated = Date and Time
-    placements = List of Placements
     
  <h2>Audience</h2>
  
@@ -90,7 +89,6 @@
     audience_description = String (Max Length = 140)
     created_on = Date and Time
     updated = Date and Time
-    placements = List of Placements
     
  <h2>Lifecycle</h2>
  
@@ -98,7 +96,6 @@
     lifecycle_description = String (Max Length = 140)
     created_on = Date and Time
     updated = Date and Time
-    placements = List of Placements
     
  <h2>LOB</h2>
  
@@ -106,7 +103,25 @@
     lob_description = String (Max Length = 140)
     created_on = Date and Time
     updated = Date and Time
-    placements = List of Placements
-
-
-
+    
+    
+<h1>Custom Attribute Xref Tables</h1>
+  <h2>Intent_xref</h2>
+ 
+    i_key = Intent FK (intent_key)
+    p_key = Placement FK (placement_id)
+    
+ <h2>Audience_xref</h2>
+ 
+    a_key = Audience FK (audience_key)
+    p_key = Placement FK (placement_id)
+    
+ <h2>Lifecycle_xref</h2>
+ 
+    lc_key = LifeCycle FK (lifecycle_key)
+    p_key = Placement FK (placement_id)
+    
+ <h2>LOB_xref</h2>
+ 
+    lob_key = LOB FK (lob_key)
+    p_key = Placement FK (placement_id)
