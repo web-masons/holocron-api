@@ -3,7 +3,6 @@
 [![Code Climate](https://codeclimate.com/github/web-masons/holocron-api/badges/gpa.svg)](https://codeclimate.com/github/web-masons/holocron-api)
 # holocron-api
  
- 
  <h1>Intro </h1>
  This is the API for the Holocron project.  It is built using Vagrant, Ansible, Python, Django and Django REST framework.
  
