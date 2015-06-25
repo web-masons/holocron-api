@@ -19,7 +19,6 @@ sys.path.append(base_path)
 sys.path.append(base_path + '/holocron-api')
 sys.path.append(base_path + '/holocron_api/api')
 
-
 # using technique from http://bit.ly/1MQc3ae to expose vars to app
 # these vars are initially set via /etc/apache2/envvars via aws user-data
 
@@ -28,23 +27,26 @@ class WSGIEnvironment(WSGIHandler):
 
     def __call__(self, environ, start_response):
 
-        env_variables_to_pass = ['DJANGO_SETTINGS_MODULE',
-                         'DJANGO_SECRET_KEY',
-                         'HOLOCRON_ENV',
-                         'HOLOCRON_DB_USER',
-                         'HOLOCRON_DB_PASS',
-                         'HOLOCRON_DB_HOST',
-                         'HOLOCRON_DB_PORT',
-                         'HOLOCRON_DB_NAME']
+        env_variables_to_pass = [
+            'DJANGO_SETTINGS_MODULE',
+            'DJANGO_SECRET_KEY',
+            'HOLOCRON_ENV',
+            'HOLOCRON_DB_USER',
+            'HOLOCRON_DB_PASS',
+            'HOLOCRON_DB_HOST',
+            'HOLOCRON_DB_PORT',
+            'HOLOCRON_DB_NAME'
+        ]
 
         # pass the WSGI environment variables on through to os.environ
         for var in env_variables_to_pass:
             os.environ[var] = environ.get(var, '')
         if os.environ['DJANGO_SETTINGS_MODULE'] == "${DJANGO_SETTINGS_MODULE}":
-            os.environ['DJANGO_SETTINGS_MODULE'] = "holocron_api.settings.local"
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE",
-                              "holocron_api.settings.local")
+            os.environ['DJANGO_SETTINGS_MODULE'] = "holocron_api.settings.local"          # noqa
+
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "holocron_api.settings.local")    # noqa
+
         django.setup()
-        return super(WSGIEnvironment,self).__call__(environ,start_response)
+        return super(WSGIEnvironment, self).__call__(environ, start_response)
 
 application = WSGIEnvironment()

@@ -1,6 +1,5 @@
-from .base import * #noqa
-# import os
-# import django
+from base import *  # noqa
+import os
 
 DEBUG = False
 

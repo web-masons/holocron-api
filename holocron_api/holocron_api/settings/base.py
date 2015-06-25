@@ -14,7 +14,7 @@ SECRET_KEY = 'NOT_SO_SECRET_KEY'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '*', # Allow domain and subdomains
+    '*',   # Allow domain and subdomains
 ]
 # Application definition
 
