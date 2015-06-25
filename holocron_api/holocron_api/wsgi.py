@@ -40,6 +40,8 @@ class WSGIEnvironment(WSGIHandler):
         # pass the WSGI environment variables on through to os.environ
         for var in env_variables_to_pass:
             os.environ[var] = environ.get(var, '')
+        if os.environ['DJANGO_SETTINGS_MODULE'] == "${DJANGO_SETTINGS_MODULE}":
+            os.environ['DJANGO_SETTINGS_MODULE'] = "holocron_api.settings.local"
         os.environ.setdefault("DJANGO_SETTINGS_MODULE",
                               "holocron_api.settings.local")
         django.setup()
