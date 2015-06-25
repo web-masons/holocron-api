@@ -59,6 +59,8 @@ class Placement(models.Model):
     source = models.ForeignKey(Source)
     creative = models.ForeignKey(Creative)
     catid = models.IntegerField(blank=True, null=True)
+    pageCat = models.CharField(max_length=100, blank=True, null=True)
+    pageID = models.CharField(max_length=100, blank=True, null=True)
     jira_ticket = models.CharField(max_length=20, blank=True, default="")
     end_date = models.DateField('End Date')
     created_on = models.DateTimeField(auto_now_add=True)
