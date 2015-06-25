@@ -70,17 +70,6 @@ TEST_PEP8_DIRS = [BASE_DIR, ]
 TEST_PEP8_EXCLUDE = ['migrations', ]
 
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'NAME': 'holocron-api.db',
-        'ENGINE': 'django.db.backends.sqlite3'
-    }
-}
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 

@@ -24,7 +24,6 @@ var/
 *.egg
 .vagrant/
 holocron_api/staticfiles
-ansible/localhost/settings.ini
 .idea
 
 # PyInstaller
@@ -61,5 +60,9 @@ docs/_build/
 # PyBuilder
 target/
 
-#terraform
+# terraform
 *.terraform
+
+# vagrantfile - to prevent commiting the push config.
+# override manually if you want to push changes using git add
+Vagrantfile

@@ -30,8 +30,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :inline => "export PYTHONUNBUFFERED=1 && export ANSIBLE_FORCE_COLOR=1 && cd /vagrant/ansible/localhost && ./provision.sh"
 
   config.push.define "atlas" do |push|
-    push.app = "carbonite/holocron-api-app"
-    push.vcs = true 
+    push.app = ""
+    push.vcs = true
   end
 
 end
