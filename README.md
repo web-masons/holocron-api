@@ -35,7 +35,8 @@
  <p>To run in multiple environments, set the following env vars.  In apache with mod_sgi, this can be done by setting the vars for apache 
  with /etc/apache2/envvars then setting the virtualhost to pass these vars into the vhost.  The wsgi.py will pick them up from there and 
  provide to the app.</p>
-<h3>DJANGO_SETTINGS_MODULE<h3> 
+ 
+<h3>DJANGO_SETTINGS_MODULE</h3> 
 <p>Name of the settings file for your env. Located in holocron_api/settings.  We pickup from settings.local if not defined. We have included
  prod, stage, and travis config examples.  These each inherit from base.py</p>
 
@@ -62,3 +63,104 @@
 <p>The db name for the database. Will be picked up by travis, stage, and prod configs.  Otherwise we use the preset value in local.py.</p>
 
  
+---
+ 
+<h1>Standard Models and fields</h1>
+ <h2>Source</h2>
+ 
+    source_key = Slug (Max Length = 100 characters, PK)
+    source_name = String (Max Length = 100)
+    created_on = Date and Time
+    updated = Date and Time
+    
+ <h2>Medium</h2>
+
+    medium_key = Slug (Max Length = 100 characters, PK)
+    medium_name = String (Max Length = 100)
+    created_on = Date and Time
+    updated = Date and Time
+
+ <h2>Creative</h2>
+ 
+    creative_id = Auto Incrementing ID (PK)
+    creative_name = String (Max Length = 100)
+    creative_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
+
+ <h2>Campaign</h2>
+
+    campaign_key = Slug (Max Length = 100 characters, PK)
+    campaign_name = String (Max Length = 100)
+    campaign_description = String (Max Length = 140)
+    created_by = String (Max Length = 100)
+    campaign_notes = String (Max Length = 140, optional)
+    end_date = Date
+    created_on = Date and Time
+    updated = Date and Time
+
+ <h2>Placement</h2>
+
+    placement_id = Auto Incrementing ID (PK)
+    placement_name = String (Max Length = 100)
+    placement_url = String (Max Length = 100)
+    campaign = Campaign FK
+    medium = Medium FK
+    source = Source FK
+    creative = Creative FK
+    catid = Integer (optional)
+    jira_ticket = String (Max Length = 20, optional)
+    end_date = Date
+    created_on = Date and Time
+    updated = Date and Time
+    
+<h1>Custom Attributes Models and Fields<h1>
+ <h2>Intent</h2>
+ 
+    intent_key = Slug (PK)
+    intent_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
+    
+ <h2>Audience</h2>
+ 
+    audience_key = Slug (PK)
+    audience_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
+    
+ <h2>Lifecycle</h2>
+ 
+    lifecycle_key = Slug (PK)
+    lifecycle_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
+    
+ <h2>LOB</h2>
+ 
+    lob_key = Slug (PK)
+    lob_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
+    
+    
+<h1>Custom Attribute Xref Tables</h1>
+  <h2>Intent_xref</h2>
+ 
+    i_key = Intent FK (intent_key)
+    p_key = Placement FK (placement_id)
+    
+ <h2>Audience_xref</h2>
+ 
+    a_key = Audience FK (audience_key)
+    p_key = Placement FK (placement_id)
+    
+ <h2>Lifecycle_xref</h2>
+ 
+    lc_key = LifeCycle FK (lifecycle_key)
+    p_key = Placement FK (placement_id)
+    
+ <h2>LOB_xref</h2>
+ 
+    lob_key = LOB FK (lob_key)
+    p_key = Placement FK (placement_id)
