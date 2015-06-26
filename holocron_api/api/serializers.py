@@ -71,7 +71,7 @@ class PlacementSerializer(serializers.ModelSerializer):
 
     def get_generated_url(self, obj):
         if obj.catid is not None:
-            if obj.pageID is not None and obj.pageCat is not None:
+            if (obj.pageID is not None and obj.pageID != "") and (obj.pageCat is not None and obj.pageCat != ""):
                 return string_concat(obj.placement_url, "?utm_campaign=",
                                      obj.campaign, "&utm_source=", obj.source,
                                      "&utm_medium=", obj.medium, "&utm_content=",
@@ -92,7 +92,7 @@ class PlacementSerializer(serializers.ModelSerializer):
                                      "-_-", obj.placement_id, "-_-",
                                      obj.creative.creative_id)
         else:
-            if obj.pageID is not None and obj.pageCat is not None:
+            if (obj.pageID is not None and obj.pageID != "") and (obj.pageCat is not None and obj.pageCat != ""):
                 return string_concat(obj.placement_url, "?utm_campaign=",
                                      obj.campaign, "&utm_source=", obj.source,
                                      "&utm_medium=", obj.medium,
