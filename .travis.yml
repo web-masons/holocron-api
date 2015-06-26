@@ -6,7 +6,7 @@ env:
     - DJANGO_SETTINGS_MODULE="holocron_api.settings.travis"
     - PROJECT_ROOT=`pwd`
     - secure: "g1KDrcMYsgcp/Psynj8Eqb9D1DFqmQTHm8qd6HmlJUaEmAnkcLgImHi/rMmiNGh3UATliiJIi9rbNTYIS8L1yH23BLM1usjQmxRVoymI/7aUqW4AbbHvkcabaSMNtcYTrU524z7ggPsoCIdMip5fRXaZoDkbSUkNoKk3Icx5MkA="
-    - secure: "J5GhcKm9ewqxs9LliNpL6CadEAx8nQcdqDNPa60pO0gPXHqy7bMWnqXFpXSjIcM6JcWVn2jn809pWwGDOc9YHLi+vmgRzSiR77muk+sHkqTabOGvf9iu1MFoQ48fOXuynqeHy9BXE8TF64TzHIKi+a+aPFFnEUdP3uVnN52WlSI="
+    - secure: "YxaCx6jFHp4/C5ZegGv283TExRAwcBCmg5Lp/uVOrFTBD4g+eIwE3qwndy8GchKZa4rke67dDsAjI1FRZ4MRg181TC56n5EhNRjwLFFGPSOz6JJFeisHK6gqSjsfW0gKWvkuhbrP+3TTbMioKKMLRjYrtPic4tkYq3QZwl1jr14="
   matrix:
     - DJANGO=1.8
 before_install:
