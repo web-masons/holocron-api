@@ -13,8 +13,9 @@ SECRET_KEY = 'NOT_SO_SECRET_KEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    '*',   # Allow domain and subdomains
+]
 # Application definition
 
 INSTALLED_APPS = (
@@ -67,17 +68,6 @@ WSGI_APPLICATION = 'holocron_api.wsgi.application'
 
 TEST_PEP8_DIRS = [BASE_DIR, ]
 TEST_PEP8_EXCLUDE = ['migrations', ]
-
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'NAME': 'holocron-api.db',
-        'ENGINE': 'django.db.backends.sqlite3'
-    }
-}
 
 
 # Internationalization

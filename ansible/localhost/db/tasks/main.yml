@@ -1,4 +1,6 @@
 ---
+  - script: postgres94.sh
+
   - name: Install PostGres
     postgresql_db: name={{dbname}}
     sudo: yes
