@@ -76,7 +76,7 @@ class PlacementSerializer(serializers.ModelSerializer):
                 return string_concat(obj.placement_url, "?utm_campaign=",
                                      obj.campaign, "&utm_source=", obj.source,
                                      "&utm_medium=", obj.medium,
-                                     "&utm_content=",obj.placement_id,
+                                     "&utm_content=", obj.placement_id,
                                      "&catid=", obj.catid,
                                      "&c3placement=", obj.placement_id,
                                      "&cm_mmc=", obj.medium, "-_-",
@@ -116,8 +116,8 @@ class PlacementSerializer(serializers.ModelSerializer):
                                      "&utm_content=", obj.placement_id,
                                      "&c3placement=", obj.placement_id,
                                      "&cm_mmc=", obj.medium, "-_-",
-                                     obj.source, "-_-", obj.placement_id, "-_-",
-                                     obj.creative.creative_id)
+                                     obj.source, "-_-", obj.placement_id,
+                                     "-_-", obj.creative.creative_id)
 
 
 class PlacementDetailsSerializer(serializers.ModelSerializer):
