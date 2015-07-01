@@ -1,10 +1,10 @@
 from django.db import models
-from django.utils import timezone
 
 
 class Campaign(models.Model):
     campaign_id = models.AutoField(primary_key=True)
-    campaign_key = models.SlugField(max_length=100, blank=True, null=True, unique=True)
+    campaign_key = models.SlugField(max_length=100, blank=True, null=True,
+                                    unique=True)
     campaign_name = models.CharField(max_length=100)
     campaign_description = models.CharField(max_length=140)
     created_by = models.CharField(max_length=100)
