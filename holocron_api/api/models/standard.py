@@ -1,9 +1,11 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.template.defaultfilters import slugify
 
 
 class Campaign(models.Model):
     campaign_id = models.AutoField(primary_key=True)
-    campaign_key = models.SlugField(max_length=100, blank=True, null=True,
+    campaign_key = models.CharField(max_length=100, blank=True, null=True,
                                     unique=True)
     campaign_name = models.CharField(max_length=100)
     campaign_description = models.CharField(max_length=140)
@@ -16,6 +18,25 @@ class Campaign(models.Model):
 
     def __str__(self):
         return self.campaign_key
+
+
+# method for updating
+def update_key(sender, *args, **kwargs):
+    i = kwargs['instance']
+    if i.campaign_key is None or i.campaign_key == "":
+        i.campaign_key = i.campaign_id
+        i.save()
+    else:
+        i2 = slugify(i.campaign_key)
+        if i.campaign_key != i2:
+            i.campaign_key = i2
+            i.save()
+        else:
+            pass
+
+
+# register the signal
+post_save.connect(update_key, sender=Campaign)
 
 
 class Medium(models.Model):
