@@ -20,7 +20,7 @@ class Campaign(models.Model):
         return self.campaign_key
 
 
-# method for updating
+# method for updating the key to match the id if it is null/blank
 def update_key(sender, *args, **kwargs):
     i = kwargs['instance']
     if i.campaign_key is None or i.campaign_key == "":
