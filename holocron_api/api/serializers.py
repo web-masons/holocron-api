@@ -7,6 +7,8 @@ class CampaignSerializer(serializers.ModelSerializer):
     class Meta:
         model = Campaign
 
+    campaign_id = serializers.ReadOnlyField()
+
 
 class MediumSerializer(serializers.ModelSerializer):
     class Meta:
@@ -74,7 +76,8 @@ class PlacementSerializer(serializers.ModelSerializer):
             if (obj.pageID is not None and obj.pageID != "") and \
                     (obj.pageCat is not None and obj.pageCat != ""):
                 return string_concat(obj.placement_url, "?utm_campaign=",
-                                     obj.campaign, "&utm_source=", obj.source,
+                                     obj.campaign.campaign_key,
+                                     "&utm_source=", obj.source,
                                      "&utm_medium=", obj.medium,
                                      "&utm_content=", obj.placement_id,
                                      "&catid=", obj.catid,
@@ -87,10 +90,11 @@ class PlacementSerializer(serializers.ModelSerializer):
 
             else:
                 return string_concat(obj.placement_url, "?utm_campaign=",
-                                     obj.campaign, "&utm_source=",
-                                     obj.source,  "&utm_medium=",
-                                     obj.medium, "&utm_content=",
-                                     obj.placement_id, "&catid=", obj.catid,
+                                     obj.campaign.campaign_key,
+                                     "&utm_source=",  obj.source,
+                                     "&utm_medium=",  obj.medium,
+                                     "&utm_content=", obj.placement_id,
+                                     "&catid=", obj.catid,
                                      "&c3placement=", obj.placement_id,
                                      "&cm_mmc=", obj.medium, "-_-",
                                      obj.source, "-_-", obj.placement_id,
@@ -99,7 +103,8 @@ class PlacementSerializer(serializers.ModelSerializer):
             if (obj.pageID is not None and obj.pageID != "") and \
                     (obj.pageCat is not None and obj.pageCat != ""):
                 return string_concat(obj.placement_url, "?utm_campaign=",
-                                     obj.campaign, "&utm_source=", obj.source,
+                                     obj.campaign.campaign_key,
+                                     "&utm_source=", obj.source,
                                      "&utm_medium=", obj.medium,
                                      "&utm_content=", obj.placement_id,
                                      "&c3placement=", obj.placement_id,
@@ -111,7 +116,8 @@ class PlacementSerializer(serializers.ModelSerializer):
 
             else:
                 return string_concat(obj.placement_url, "?utm_campaign=",
-                                     obj.campaign, "&utm_source=", obj.source,
+                                     obj.campaign.campaign_key,
+                                     "&utm_source=", obj.source,
                                      "&utm_medium=", obj.medium,
                                      "&utm_content=", obj.placement_id,
                                      "&c3placement=", obj.placement_id,

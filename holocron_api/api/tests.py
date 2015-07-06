@@ -23,11 +23,14 @@ class MediumFactory(factory.DjangoModelFactory):
 class CampaignFactory(factory.DjangoModelFactory):
     class Meta:
         model = Campaign
+    campaign_id = 1
     campaign_name = "Testing Campaign"
     campaign_description = "This is a Test"
-    end_date = "2040-12-12"
     campaign_key = "TestCampaign"
     created_by = "Test User"
+    campaign_notes = "This is a note"
+    start_date = None
+    end_date = None
 
 
 class CreativeFactory(factory.DjangoModelFactory):
@@ -280,14 +283,6 @@ class CampaignAPITest(APITestCase):
         response = self.client.post('/campaign/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_missing_date_campaign_api(self):
-        data = {'campaign_name': 'Test',
-                'campaign_description': 'This one is mine',
-                'campaign_key': 'CampaignTest',
-                'created_by': 'Test User'}
-        response = self.client.post('/campaign/', data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
     def test_bad_date_campaign_api(self):
         data = {'campaign_name': 'Test',
                 'campaign_description': 'This one is mine',
@@ -417,28 +412,34 @@ class PlacementAPITest(APITestCase):
     def test_post_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test Placement",
-                "placement_url": "www.testurl.com",
-                "end_date": "2040-01-01",
-                "campaign": "TestCampaign",
+                "placement_url": "www.carbonite.com/pricing",
+                "catid": 94835,
+                "pageCat": "",
+                "pageID": "",
+                "jira_ticket": "",
+                "start_date": None,
+                "end_date": None,
+                "campaign": 1,
                 "medium": "Test_Medium",
                 "source": "TestingSource",
-                "creative": 1,
-                "catid": None,
-                "jira_ticket": "AN-154"}
+                "creative": 1}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_post_placement_api_optional_fields(self):
         self.make_pks()
-        data = {"placement_name": "Test Placement",
-                "placement_url": "www.testurl.com",
-                "end_date": "2040-01-01",
-                "campaign": "TestCampaign",
+        data = {"placement_name": "Test Placement 2",
+                "placement_url": "www.carbonite.com/pricing",
+                "catid": 94835,
+                "pageCat": "Test",
+                "pageID": "Still Test",
+                "jira_ticket": "Ticket-234",
+                "start_date": "2015-07-07",
+                "end_date": "2040-07-07",
+                "campaign": 1,
                 "medium": "Test_Medium",
                 "source": "TestingSource",
-                "creative": 1,
-                "catid": 12345,
-                "jira_ticket": "AN-154"}
+                "creative": 1}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
@@ -680,12 +681,12 @@ class PlacementAPITest(APITestCase):
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_int_campaign_placement_api(self):
+    def test_non_int_campaign_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test",
                 "placement_url": "www.testurl.com",
                 "end_date": "2040-01-01",
-                "campaign": 1,
+                "campaign": "test",
                 "medium": "Test_Medium",
                 "source": "TestingSource",
                 "creative": 1,
