@@ -73,7 +73,7 @@ class Creative(models.Model):
 class Placement(models.Model):
     placement_id = models.AutoField(primary_key=True)
     placement_name = models.CharField(max_length=100)
-    placement_url = models.CharField(max_length=100)
+    placement_url = models.CharField(max_length=250)
     campaign = models.ForeignKey(Campaign)
     medium = models.ForeignKey(Medium)
     source = models.ForeignKey(Source)
