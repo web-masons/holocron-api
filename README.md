@@ -36,6 +36,11 @@
  with /etc/apache2/envvars then setting the virtualhost to pass these vars into the vhost.  The wsgi.py will pick them up from there and 
  provide to the app.</p>
  
+ <h3>Included Apps (Endpoints)</h3>
+ <p> - API: Manages links and link generation of marketing placements </p>
+ <p> - Blacklist Manager: Creates a Blacklist database to use for filtering in other Applications </p>
+ 
+ 
 <h3>DJANGO_SETTINGS_MODULE</h3> 
 <p>Name of the settings file for your env. Located in holocron_api/settings.  We pickup from settings.local if not defined. We have included
  prod, stage, and travis config examples.  These each inherit from base.py</p>
@@ -65,7 +70,7 @@
  
 ---
  
-<h1>Standard Models and fields</h1>
+<h1>Standard Models and fields for PCT API</h1>
  <h2>Source</h2>
  
     source_key = Slug (Max Length = 100 characters, PK)
@@ -90,11 +95,13 @@
 
  <h2>Campaign</h2>
 
+    campaign_id = Auto Incrementing ID (PK)
     campaign_key = Slug (Max Length = 100 characters, PK)
     campaign_name = String (Max Length = 100)
     campaign_description = String (Max Length = 140)
     created_by = String (Max Length = 100)
     campaign_notes = String (Max Length = 140, optional)
+    start_date = Date
     end_date = Date
     created_on = Date and Time
     updated = Date and Time
@@ -110,6 +117,9 @@
     creative = Creative FK
     catid = Integer (optional)
     jira_ticket = String (Max Length = 20, optional)
+    pageID = String (optional)
+    pageCat = String (optional)
+    start_date = Date
     end_date = Date
     created_on = Date and Time
     updated = Date and Time
@@ -164,3 +174,33 @@
  
     lob_key = LOB FK (lob_key)
     p_key = Placement FK (placement_id)
+    
+---
+ 
+<h1>Standard Models and fields for Blacklist Manager API</h1>
+
+  <h2>BlacklistEntry</h2>
+    entry_type = string (Limited to 2 characters.
+                        IP = IP Address
+                        IR = IP Range (CIDR)
+                        UA = User Agent)
+    entry = String (IP - Valid IPv4 or IPv6 address
+                    IR - Valid IPv4 CIDR address
+                    UA - String)
+    description = String (max_length=100)
+    added_by = String (max_length=100)
+    created_on = Date and Time
+    updated = Date and Time
+    
+    
+  <h2>Entries</h2>
+    entry_type = string (Limited to 2 characters.
+                        IP = IP Address
+                        UA = User Agent)
+    entry = String (IP - Valid IPv4 or IPv6 address
+                    UA - String)
+    description = String (max_length=100)
+    updated_by = String (max_length=100)
+    related_to = String (list of BlacklistEntry PKs that contain this IP address)
+    created_on = Date and Time
+    updated = Date and Time
