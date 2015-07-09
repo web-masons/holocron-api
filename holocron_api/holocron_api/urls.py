@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from rest_framework import routers
-from api.views import *
-from blacklist_manager.views import *
+from api.views import *  # noqa
+from blacklist_manager.views import *  # noqa
 
 router = routers.DefaultRouter()
 router.register(r'api/campaign', CampaignViewSet)
