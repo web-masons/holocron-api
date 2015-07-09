@@ -20,7 +20,7 @@ install:
   - pip install -q coveralls
 before_script:
   - echo "Navigate to Test Suite"
-  - flake8 --exclude 'migrations' --max-complexity 10 holocron_api
+  - flake8 --exclude 'migrations' --max-complexity 10 --max-line-length 100 holocron_api
   - psql -c 'create database travis_ci_test;' -U postgres
   - python ./holocron_api/manage.py makemigrations
   - python ./holocron_api/manage.py migrate
