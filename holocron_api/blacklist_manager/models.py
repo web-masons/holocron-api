@@ -21,6 +21,9 @@ class BlacklistEntry(models.Model):
     updated = models.DateTimeField(auto_now=True)
     entry = models.CharField(max_length=100, unique=True)
 
+    class Meta:
+        app_label = "blacklist_manager"
+
 
 class Entries(models.Model):
     IP_ADDRESS = 'IP'
@@ -38,3 +41,6 @@ class Entries(models.Model):
     update_by = models.CharField(max_length=100)
     created_on = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        app_label = "blacklist_manager"
