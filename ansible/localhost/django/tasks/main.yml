@@ -23,5 +23,9 @@
     pip: name=whitenoise
     sudo: yes
 
+  - name: Install NetAddr for IP ranges
+    pip: name=netaddr
+    sudo: yes
+
   - name: collectstatic for Django
     django_manage: command=collectstatic app_path={{ app_path }}
