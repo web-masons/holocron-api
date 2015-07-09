@@ -15,8 +15,7 @@ def save_entry(sender, *args, **kwargs):
     if i.entry_type is IP_ADDRESS or i.entry_type is USER_AGENT:
         obj, created = Entries.objects.get_or_create(entry_type=i.entry_type,
                                                      entry=i.entry,
-                                                     description=
-                                                     i.description,
+                                                     description=i.description,
                                                      update_by=i.added_by,
                                                      defaults={
                                                          'related_to': i.id
@@ -35,13 +34,10 @@ def save_entry(sender, *args, **kwargs):
         my_list = BlacklistEntry.objects.filter(Q(entry_type=IP_ADDRESS) |
                                                 Q(entry_type=USER_AGENT))
         for item in my_list:
-            obj, created = Entries.objects.get_or_create(entry_type=
-                                                         item.entry_type,
+            obj, created = Entries.objects.get_or_create(entry_type=item.entry_type,
                                                          entry=item.entry,
-                                                         description=
-                                                         item.description,
-                                                         update_by=
-                                                         item.added_by,
+                                                         description=item.description,
+                                                         update_by=item.added_by,
                                                          defaults={
                                                              'related_to':
                                                                  item.id
@@ -57,19 +53,12 @@ def save_entry(sender, *args, **kwargs):
         my_list = BlacklistEntry.objects.filter(entry_type=IP_RANGE)
         for item in my_list:
             for ip in IPNetwork(item.entry):
-                obj, created = Entries.objects.get_or_create(entry_type=
-                                                             IP_ADDRESS,
+                obj, created = Entries.objects.get_or_create(entry_type=IP_ADDRESS,
                                                              entry=ip,
                                                              defaults={
-                                                                 'related_to':
-                                                                     item.id,
-                                                                 'desc'
-                                                                 'ription':
-                                                                     item.
-                                                                     description,
-                                                                 'update_by':
-                                                                     item.
-                                                                     added_by,
+                                                                 'related_to': item.id,
+                                                                 'description': item.description,
+                                                                 'update_by': item.added_by,
                                                              })
 
                 if not created:
@@ -92,11 +81,9 @@ def remove_entry(sender, *args, **kwargs):
     my_list = BlacklistEntry.objects.filter(Q(entry_type=IP_ADDRESS) |
                                             Q(entry_type=USER_AGENT))
     for item in my_list:
-        obj, created = Entries.objects.get_or_create(entry_type=
-                                                     item.entry_type,
+        obj, created = Entries.objects.get_or_create(entry_type=item.entry_type,
                                                      entry=item.entry,
-                                                     description=
-                                                     item.description,
+                                                     description=item.description,
                                                      update_by=item.added_by,
                                                      defaults={
                                                          'related_to': item.id
@@ -112,18 +99,12 @@ def remove_entry(sender, *args, **kwargs):
     my_list = BlacklistEntry.objects.filter(entry_type=IP_RANGE)
     for item in my_list:
         for ip in IPNetwork(item.entry):
-            obj, created = Entries.objects.get_or_create(entry_type=
-                                                         IP_ADDRESS,
+            obj, created = Entries.objects.get_or_create(entry_type=IP_ADDRESS,
                                                          entry=ip,
                                                          defaults={
-                                                             'related_to':
-                                                                 item.id,
-                                                             'description':
-                                                                 item.
-                                                                 description,
-                                                             'update_by':
-                                                                 item.
-                                                                 added_by,
+                                                             'related_to': item.id,
+                                                             'description': item.description,
+                                                             'update_by': item.added_by,
                                                          })
 
             if not created:
