@@ -27,7 +27,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
-    'test_pep8'
+    'test_pep8',
+    'blacklist_manager'
 )
 
 REST_FRAMEWORK = {
