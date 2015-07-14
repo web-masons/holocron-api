@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
+from Ad_Network import Ad_Network
 
 
 class Campaign(models.Model):
@@ -81,6 +82,7 @@ class Placement(models.Model):
     catid = models.IntegerField(blank=True, null=True)
     pageCat = models.CharField(max_length=100, blank=True, null=True)
     pageID = models.CharField(max_length=100, blank=True, null=True)
+    ad_network = models.ForeignKey(Ad_Network, blank=True, null=True)
     jira_ticket = models.CharField(max_length=20, blank=True, default="")
     start_date = models.DateField('Start Date', blank=True, null=True)
     end_date = models.DateField('End Date', blank=True, null=True)

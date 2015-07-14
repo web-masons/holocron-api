@@ -98,6 +98,13 @@ class Audience_xref_ViewSet(viewsets.ModelViewSet):
     queryset = Audience_xref.objects.all()
     serializer_class = Audience_xref_Serializer
 
+class Ad_Network_ViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Content to be viewed or edited.
+    """
+    queryset = Ad_Network.objects.all()
+    serializer_class = Ad_Network_Serializer
+
 
 class PlacementViewSet(viewsets.ModelViewSet):
     """
