@@ -1,7 +1,7 @@
 from rest_framework.test import APITestCase
 from rest_framework.test import APIClient
 from api.models import Source, Medium, Campaign, Creative, \
-    LOB, Intent, LifeCycle, Audience
+    LOB, Intent, LifeCycle, Audience, Ad_Network
 from rest_framework import status
 import factory
 
@@ -69,6 +69,13 @@ class AudienceFactory(factory.DjangoModelFactory):
     audience_description = "Everyone"
 
 
+class AdNetworkFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Ad_Network
+    network_key = "Ad Network A"
+    network_description = "Test Network"
+
+
 class SourceTest(APITestCase):
 
     @staticmethod
@@ -125,6 +132,19 @@ class CampaignTest(APITestCase):
     def test_was_created(self):
         ca = self.create_test()
         self.assertTrue(isinstance(ca, Campaign))
+
+
+class AdNetworkTest(APITestCase):
+
+    @staticmethod
+    def create_test(network_key="Test Network",
+                    network_description="This is a test Network"):
+        return Ad_Network.objects.create(network_key=network_key,
+                                         network_description=network_description)
+
+    def test_was_created(self):
+        a = self.create_test()
+        self.assertTrue(isinstance(a, Ad_Network))
 
 
 class SourceAPITest(APITestCase):
@@ -390,6 +410,61 @@ class CreativeAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
+class AdNetworkAPITest(APITestCase):
+    def test_post_network_api(self):
+        data = {'network_key': 'My Ad Network',
+                'network_description': 'Test Network'}
+        response = self.client.post('/ad-network/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    # Testing sql injection is cast to String
+    def test_post_sql_network_api(self):
+        data = {'network_key': 'DROP TABLE *',
+                'network_description': 'SQL Ad'}
+        response = self.client.post('/ad-network/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_get_network_api(self):
+        client = APIClient()
+        response = client.get("/source/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_empty_post_network_api(self):
+        data = {'network_key': '',
+                'network_description': ''}
+        response = self.client.post('/ad-network/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_no_data_post_network_api(self):
+        data = {}
+        response = self.client.post('/ad-network/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_bad_param_post_network_api(self):
+        data = {'name': 'test',
+                'network_description': 'New Ad'}
+        response = self.client.post('/ad-network/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_too_long_post_network_api(self):
+        data = {'network_key': 'Random o85y9384ytoerty3849yroehg '
+                               'yhvytvytoa8y4tyv8ytoeryto8y34o8ythiua48y'
+                               'tlai4ytai47tyiow4t8orghowiy4toi4ehtoweit',
+                'network_description': 'New Ad'}
+        response = self.client.post('/ad-network/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_too_long_desc_post_network_api(self):
+        data = {'network_key': 'Ad Network A',
+                'network_description': 'Random o85y9384ytoerty3849yroehg '
+                               'yhvytvytoa8y4tyv8ytoeryto8y34o8ythiua48y'
+                               'tlai4ytai47tyiow4t8orghowiy4toi4ehtoweit sdhg'
+                               'skughksrughsk gskshgksghskghskeuhgkdjghvsdkjgh'
+                               'sughksughksuhfgksdfhskdjhvgksjutg'}
+        response = self.client.post('/ad-network/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
 class PlacementAPITest(APITestCase):
 
     @staticmethod
@@ -398,6 +473,7 @@ class PlacementAPITest(APITestCase):
         MediumFactory.create()
         CampaignFactory.create()
         CreativeFactory.create()
+        AdNetworkFactory.create()
 
     def test_get_placement_api(self):
         client = APIClient()
@@ -439,7 +515,8 @@ class PlacementAPITest(APITestCase):
                 "campaign": 1,
                 "medium": "Test_Medium",
                 "source": "TestingSource",
-                "creative": 1}
+                "creative": 1,
+                "ad_network": "Ad Network A"}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
@@ -734,5 +811,20 @@ class PlacementAPITest(APITestCase):
                 "creative": "My Content",
                 "catid": 12345,
                 "jira_ticket": "AN-154"}
+        response = self.client.post('/placement/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_invalid_network_placement_api(self):
+        self.make_pks()
+        data = {"placement_name": "Test",
+                "placement_url": "www.testurl.com",
+                "end_date": "2040-01-01",
+                "campaign": "TestCampaign",
+                "medium": "Test_Medium",
+                "source": "TestingSource",
+                "creative": 1,
+                "catid": 12345,
+                "jira_ticket": "AN-154",
+                "ad_network": 0}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
