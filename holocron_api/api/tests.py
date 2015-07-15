@@ -410,7 +410,7 @@ class CreativeAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
-class Ad_NetworkAPITest(APITestCase):
+class AdNetworkAPITest(APITestCase):
     def test_post_network_api(self):
         data = {'network_key': 'My Ad Network',
                 'network_description': 'Test Network'}

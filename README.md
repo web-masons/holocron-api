@@ -3,10 +3,10 @@
 [![Code Climate](https://codeclimate.com/github/web-masons/holocron-api/badges/gpa.svg)](https://codeclimate.com/github/web-masons/holocron-api)
 # holocron-api
  
- <h1>Intro </h1>
+# Intro
  This is the API for the Holocron project.  It is built using Vagrant, Ansible, Python, Django and Django REST framework.
  
- <h2>To Install and run </h2>
+## To Install and run
  1. <p>Clone (or Fork) repository </p>
  2. <p>cd to /holocron_api folder, where Vagrantile is located </p>
  <p>      -Note: A local postgres db will be created using settings as configured in ansible/localhost/db/tasks/main.yml.  
@@ -19,11 +19,12 @@
  5. <p> View test API at https://holocron-api.com/ </p>
  6. <p><i> Note: /placement-details/ does not display correctly at root.  This is a Django rest bug.  The url itself does still work. </i></p>
 
- <h2>To Run tests</h2>
- <p> <code> python manage.py test  </code>  - Run from main app folder in vagrant box where <i>manage.py</i> is present.
- - This will run both the unit tests as well as the PEP 8 tests.</p>
+## To Run tests
+    python manage.py test
+- Run from main app folder in vagrant box where <i>manage.py</i> is present.
+- This will run both the unit tests as well as the PEP 8 tests.
  
- <h2>Deployment</h2>
+## Deployment
 
  <p>Hashicorp's Atlas can be used to build and deploy. If you will be using Atlas, don't forget to add your atlas application to your push config in the Vagrantfile.</p>
 
@@ -36,56 +37,56 @@
  with /etc/apache2/envvars then setting the virtualhost to pass these vars into the vhost.  The wsgi.py will pick them up from there and 
  provide to the app.</p>
  
- <h3>Included Apps (Endpoints)</h3>
+### Included Apps (Endpoints)
  <p> - API: Manages links and link generation of marketing placements </p>
  <p> - Blacklist Manager: Creates a Blacklist database to use for filtering in other Applications </p>
  
  
-<h3>DJANGO_SETTINGS_MODULE</h3> 
+### DJANGO_SETTINGS_MODULE 
 <p>Name of the settings file for your env. Located in holocron_api/settings.  We pickup from settings.local if not defined. We have included
  prod, stage, and travis config examples.  These each inherit from base.py</p>
 
-<h3>DJANGO_SECRET_KEY</h3>
+### DJANGO_SECRET_KEY
 <p>This is a secret. Will be picked up by travis, stage, and prod configs.  Otherwise we use the preset key in local.py.  Please change
  this in production as many of django's security features use this and expect it to be secret.</p>
 
-<h3>HOLOCRON_ENV</h3>
+### HOLOCRON_ENV
 <p>This is environment you are in.  Currently unused.</p>
 
-<h3>HOLOCRON_DB_USER</h3>
+### HOLOCRON_DB_USER
 <p>The user for the database. Will be picked up by travis, stage, and prod configs.  Otherwise we use the preset value in local.py.</p>
 
-<h3>HOLOCRON_DB_PASS</h3>
+### HOLOCRON_DB_PASS
 <p>The password for the database. Will be picked up by travis, stage, and prod configs.  Otherwise we use the preset value in local.py.</p>
 
-<h3>HOLOCRON_DB_HOST</h3>
+### HOLOCRON_DB_HOST
 <p>The hostname of the database server. Will be picked up by travis, stage, and prod configs.  Otherwise we use the preset value in local.py.</p>
 
-<h3>HOLOCRON_DB_PORT</h3>
+### HOLOCRON_DB_PORT
 <p>The port for the database. Will be picked up by travis, stage, and prod configs.  Otherwise we use the preset value in local.py.</p>
 
-<h3>HOLOCRON_DB_NAME</h3>
+### HOLOCRON_DB_NAME
 <p>The db name for the database. Will be picked up by travis, stage, and prod configs.  Otherwise we use the preset value in local.py.</p>
 
  
 ---
  
-<h1>Standard Models and fields for PCT API</h1>
- <h2>Source</h2>
+# Standard Models and fields for PCT API
+## Source
  
     source_key = Slug (Max Length = 100 characters, PK)
     source_name = String (Max Length = 100)
     created_on = Date and Time
     updated = Date and Time
     
- <h2>Medium</h2>
+## Medium
 
     medium_key = Slug (Max Length = 100 characters, PK)
     medium_name = String (Max Length = 100)
     created_on = Date and Time
     updated = Date and Time
 
- <h2>Creative</h2>
+## Creative
  
     creative_id = Auto Incrementing ID (PK)
     creative_name = String (Max Length = 100)
@@ -93,7 +94,7 @@
     created_on = Date and Time
     updated = Date and Time
 
- <h2>Campaign</h2>
+## Campaign
 
     campaign_id = Auto Incrementing ID (PK)
     campaign_key = Slug (Max Length = 100 characters, PK)
@@ -106,7 +107,7 @@
     created_on = Date and Time
     updated = Date and Time
 
- <h2>Placement</h2>
+## Placement
 
     placement_id = Auto Incrementing ID (PK)
     placement_name = String (Max Length = 100)
@@ -119,67 +120,76 @@
     jira_ticket = String (Max Length = 20, optional)
     pageID = String (optional)
     pageCat = String (optional)
+    ad_network = Ad_Network FK (optional)
     start_date = Date
     end_date = Date
     created_on = Date and Time
     updated = Date and Time
     
-<h1>Custom Attributes Models and Fields<h1>
- <h2>Intent</h2>
+# Custom Attributes Models and Fields# 
+## Intent
  
     intent_key = Slug (PK)
     intent_description = String (Max Length = 140)
     created_on = Date and Time
     updated = Date and Time
     
- <h2>Audience</h2>
+## Audience
  
     audience_key = Slug (PK)
     audience_description = String (Max Length = 140)
     created_on = Date and Time
     updated = Date and Time
     
- <h2>Lifecycle</h2>
+## Lifecycle
  
     lifecycle_key = Slug (PK)
     lifecycle_description = String (Max Length = 140)
     created_on = Date and Time
     updated = Date and Time
     
- <h2>LOB</h2>
+## LOB
  
     lob_key = Slug (PK)
     lob_description = String (Max Length = 140)
     created_on = Date and Time
     updated = Date and Time
     
+## Ad_Network
+    network_key = String (Max Length = 100)
+    network_description = String (Max Length = 140)
+    created_on = Date and Time
+    updated = Date and Time
     
-<h1>Custom Attribute Xref Tables</h1>
-  <h2>Intent_xref</h2>
+    
+# Custom Attribute Xref Tables
+
+## Intent_xref
  
     i_key = Intent FK (intent_key)
     p_key = Placement FK (placement_id)
     
- <h2>Audience_xref</h2>
+## Audience_xref
  
     a_key = Audience FK (audience_key)
     p_key = Placement FK (placement_id)
     
- <h2>Lifecycle_xref</h2>
+## Lifecycle_xref
  
     lc_key = LifeCycle FK (lifecycle_key)
     p_key = Placement FK (placement_id)
     
- <h2>LOB_xref</h2>
+## LOB_xref
  
     lob_key = LOB FK (lob_key)
     p_key = Placement FK (placement_id)
     
 ---
  
-<h1>Standard Models and fields for Blacklist Manager API</h1>
+# Standard Models and fields for Blacklist Manager API
 
-  <h2>BlacklistEntry</h2>
+
+## BlacklistEntry
     entry_type = string (Limited to 2 characters.
                         IP = IP Address
                         IR = IP Range (CIDR)
@@ -193,7 +203,8 @@
     updated = Date and Time
     
     
-  <h2>Entries</h2>
+
+## Entries
     entry_type = string (Limited to 2 characters.
                         IP = IP Address
                         UA = User Agent)
