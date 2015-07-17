@@ -65,6 +65,11 @@ class Audience_xref_Serializer(serializers.ModelSerializer):
         model = Audience_xref
 
 
+class Ad_Network_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ad_Network
+
+
 class PlacementSerializer(serializers.ModelSerializer):
     generated_url = serializers.SerializerMethodField()
 
