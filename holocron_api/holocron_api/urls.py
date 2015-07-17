@@ -4,7 +4,9 @@ from api.views import *  # noqa
 from blacklist_manager.views import *  # noqa
 
 router = routers.DefaultRouter()
+router.register(r'program', ProgramViewSet)
 router.register(r'campaign', CampaignViewSet)
+router.register(r'tactic', TacticViewSet)
 router.register(r'medium', MediumViewSet)
 router.register(r'source', SourceViewSet)
 router.register(r'creative', CreativeViewSet)

@@ -7,13 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('api', '0002_auto_20150702_1917'),
+        ('api', '0002_auto_20150716_1859'),
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='placement',
-            name='placement_url',
-            field=models.CharField(max_length=250),
+        migrations.AddField(
+            model_name='tactic',
+            name='campaign',
+            field=models.ForeignKey(default=1, to='api.Campaign'),
         ),
     ]

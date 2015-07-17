@@ -3,12 +3,22 @@ from rest_framework import viewsets
 from api.serializers import *  # noqa
 
 
+class ProgramViewSet(viewsets.ModelViewSet):
+    queryset = Program.objects.all()
+    serializer_class = ProgramSerializer
+
+
 class CampaignViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows Campaigns to be viewed or edited.
-    """
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
+
+
+class TacticViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Tactics to be viewed or edited.
+    """
+    queryset = Tactic.objects.all()
+    serializer_class = TacticSerializer
 
 
 class MediumViewSet(viewsets.ModelViewSet):

@@ -3,11 +3,21 @@ from api.models import *  # noqa
 from django.utils.translation import string_concat
 
 
+class ProgramSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Program
+
+
 class CampaignSerializer(serializers.ModelSerializer):
     class Meta:
         model = Campaign
 
-    campaign_id = serializers.ReadOnlyField()
+
+class TacticSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tactic
+
+    tactic_id = serializers.ReadOnlyField()
 
 
 class MediumSerializer(serializers.ModelSerializer):
@@ -81,7 +91,7 @@ class PlacementSerializer(serializers.ModelSerializer):
             if (obj.pageID is not None and obj.pageID != "") and \
                     (obj.pageCat is not None and obj.pageCat != ""):
                 return string_concat(obj.placement_url, "?utm_campaign=",
-                                     obj.campaign.campaign_key,
+                                     obj.tactic.tactic_key,
                                      "&utm_source=", obj.source,
                                      "&utm_medium=", obj.medium,
                                      "&utm_content=", obj.placement_id,
@@ -95,7 +105,7 @@ class PlacementSerializer(serializers.ModelSerializer):
 
             else:
                 return string_concat(obj.placement_url, "?utm_campaign=",
-                                     obj.campaign.campaign_key,
+                                     obj.tactic.tactic_key,
                                      "&utm_source=",  obj.source,
                                      "&utm_medium=",  obj.medium,
                                      "&utm_content=", obj.placement_id,
@@ -108,7 +118,7 @@ class PlacementSerializer(serializers.ModelSerializer):
             if (obj.pageID is not None and obj.pageID != "") and \
                     (obj.pageCat is not None and obj.pageCat != ""):
                 return string_concat(obj.placement_url, "?utm_campaign=",
-                                     obj.campaign.campaign_key,
+                                     obj.tactic.tactic_key,
                                      "&utm_source=", obj.source,
                                      "&utm_medium=", obj.medium,
                                      "&utm_content=", obj.placement_id,
@@ -121,7 +131,7 @@ class PlacementSerializer(serializers.ModelSerializer):
 
             else:
                 return string_concat(obj.placement_url, "?utm_campaign=",
-                                     obj.campaign.campaign_key,
+                                     obj.tactic.tactic_key,
                                      "&utm_source=", obj.source,
                                      "&utm_medium=", obj.medium,
                                      "&utm_content=", obj.placement_id,

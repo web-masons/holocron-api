@@ -23,23 +23,26 @@
     python manage.py test
 - Run from main app folder in vagrant box where <i>manage.py</i> is present.
 - This will run both the unit tests as well as the PEP 8 tests.
+
+
+#### To run tests for a single app
+    python manage.py test *app_name*
+    
+- Can be run on: 'api', 'pep8' and 'blacklist_manager'
  
 ## Deployment
-
  <p>Hashicorp's Atlas can be used to build and deploy. If you will be using Atlas, don't forget to add your atlas application to your push config in the Vagrantfile.</p>
-
  <p>This project includes 3 ansible roles.  The Base and Django roles will setup the base environment for running in stage or prod.  
  The Db role can be run in dev to create a local db.  These roles will configure an apache server with mod_wsgi to server the app. 
  If you don't want to use ansible, you can setup any wsgi server to serve the /holocron_api/holocron_api/wsgi.py application.
  </p>
- 
  <p>To run in multiple environments, set the following env vars.  In apache with mod_sgi, this can be done by setting the vars for apache 
  with /etc/apache2/envvars then setting the virtualhost to pass these vars into the vhost.  The wsgi.py will pick them up from there and 
  provide to the app.</p>
  
 ### Included Apps (Endpoints)
- <p> - API: Manages links and link generation of marketing placements </p>
- <p> - Blacklist Manager: Creates a Blacklist database to use for filtering in other Applications </p>
+- API: Manages links and link generation of marketing placements
+- Blacklist Manager: Creates a Blacklist database to use for filtering in other Applications
  
  
 ### DJANGO_SETTINGS_MODULE 
@@ -93,15 +96,41 @@
     creative_description = String (Max Length = 140)
     created_on = Date and Time
     updated = Date and Time
+    
+## Program
 
+    program_key = String (Max Length = 100 characters, PK)
+    program_name = String (Max Length = 100)
+    program_description = String (Max Length = 140)
+    created_by = String (Max Length = 100)
+    program_notes = String (Max Length = 140, optional)
+    start_date = Date
+    end_date = Date
+    created_on = Date and Time
+    updated = Date and Time
+    
 ## Campaign
 
-    campaign_id = Auto Incrementing ID (PK)
-    campaign_key = Slug (Max Length = 100 characters, PK)
+    campaign_key = String (Max Length = 100 characters, PK)
     campaign_name = String (Max Length = 100)
     campaign_description = String (Max Length = 140)
     created_by = String (Max Length = 100)
     campaign_notes = String (Max Length = 140, optional)
+    program = Program FK
+    start_date = Date
+    end_date = Date
+    created_on = Date and Time
+    updated = Date and Time
+
+## Tactic
+
+    tactic_id = Auto Incrementing ID (PK)
+    tactic_key = Slug (Max Length = 100 characters)
+    tactic_name = String (Max Length = 100)
+    tactic_description = String (Max Length = 140)
+    created_by = String (Max Length = 100)
+    tactic_notes = String (Max Length = 140, optional)
+    campaign = Campaign FK
     start_date = Date
     end_date = Date
     created_on = Date and Time
@@ -112,7 +141,7 @@
     placement_id = Auto Incrementing ID (PK)
     placement_name = String (Max Length = 100)
     placement_url = String (Max Length = 100)
-    campaign = Campaign FK
+    tactic = Tactic FK
     medium = Medium FK
     source = Source FK
     creative = Creative FK
