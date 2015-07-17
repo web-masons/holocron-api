@@ -5,7 +5,7 @@ from Ad_Network import Ad_Network
 
 
 class Program(models.Model):
-    program_key = models.CharField(max_length=100, primary_key=True)
+    program_id = models.AutoField(primary_key=True)
     program_name = models.CharField(max_length=100)
     program_description = models.CharField(max_length=140)
     created_by = models.CharField(max_length=100)
@@ -20,7 +20,7 @@ class Program(models.Model):
 
 
 class Campaign(models.Model):
-    campaign_key = models.CharField(max_length=100, primary_key=True)
+    campaign_id = models.AutoField(primary_key=True)
     campaign_name = models.CharField(max_length=100)
     campaign_description = models.CharField(max_length=140)
     program = models.ForeignKey(Program)
@@ -32,7 +32,7 @@ class Campaign(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.campaign_key
+        return self.campaign_name
 
 
 class Tactic(models.Model):
@@ -41,7 +41,7 @@ class Tactic(models.Model):
                                   unique=True)
     tactic_name = models.CharField(max_length=100)
     tactic_description = models.CharField(max_length=140)
-    campaign = models.ForeignKey(Campaign)
+    campaign = models.ForeignKey(Campaign, default=1)
     created_by = models.CharField(max_length=100)
     tactic_notes = models.CharField(max_length=140, blank=True)
     start_date = models.DateField('Start Date', blank=True, null=True)

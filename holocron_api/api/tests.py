@@ -32,7 +32,7 @@ class TacticFactory(factory.DjangoModelFactory):
     tactic_notes = "This is a note"
     start_date = None
     end_date = None
-    campaign = Campaign.objects.get(campaign_key='no-attribution')
+    campaign = Campaign.objects.get(campaign_id=1)
 
 
 class CreativeFactory(factory.DjangoModelFactory):
@@ -130,7 +130,7 @@ class TacticTest(APITestCase):
                                      end_date=end_date,
                                      tactic_key=tactic_key,
                                      created_by=created_by,
-                                     campaign=Campaign.objects.get(campaign_key="no-attribution"),)
+                                     campaign=Campaign.objects.get(campaign_id=1))
 
     def test_was_created(self):
         ca = self.create_test()
@@ -139,15 +139,13 @@ class TacticTest(APITestCase):
 
 class CampaignTest(APITestCase):
     @staticmethod
-    def create_test(campaign_key="Campaign_Test",
-                    campaign_name="My Test Campaign",
+    def create_test(campaign_name="My Test Campaign",
                     campaign_description="This is a test Campagin",
                     created_by="system"):
-        return Campaign.objects.create(campaign_key=campaign_key,
-                                       campaign_name=campaign_name,
+        return Campaign.objects.create(campaign_name=campaign_name,
                                        campaign_description=campaign_description,
                                        created_by=created_by,
-                                       program=Program.objects.get(program_key="general-business"))
+                                       program=Program.objects.get(program_id=1))
 
     def test_was_created(self):
         camp = self.create_test()
@@ -156,12 +154,10 @@ class CampaignTest(APITestCase):
 
 class ProgramTest(APITestCase):
     @staticmethod
-    def create_test(program_key="Program_Test",
-                    program_name="My Test Program",
+    def create_test(program_name="My Test Program",
                     program_description="This is a test Program",
                     created_by="system"):
-        return Program.objects.create(program_key=program_key,
-                                      program_name=program_name,
+        return Program.objects.create(program_name=program_name,
                                       program_description=program_description,
                                       created_by=created_by)
 
@@ -274,130 +270,105 @@ class MediumAPITest(APITestCase):
 
 class TacticAPITest(APITestCase):
 
-    @staticmethod
-    def make_pks():
-        Program.objects.create(program_key="TestP",
-                               program_name="General Business",
-                               program_description="Default collection",
-                               created_by="system")
-
-        Campaign.objects.create(campaign_key='TestC',
-                                campaign_name='No Attribution',
-                                campaign_description='Tactics with no known campaign',
-                                created_by='system',
-                                program=Program.objects.get(program_key="TestP"))
-
     def test_post_tactic_api(self):
-        self.make_pks()
         data = {'tactic_name': 'My tactic',
                 'tactic_description': 'This one is mine',
                 'end_date': '2020-12-12',
                 'tactic_key': 'tacticTest',
                 'created_by': 'Test User',
-                'campaign': 'TestC'}
+                'campaign': 1}
         response = self.client.post('/tactic/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_post_sql_tactic_api(self):
-        self.make_pks()
         data = {'tactic_name': 'DROP TABLE *',
                 'tactic_description': 'DROP TABLE *',
                 'end_date': '2020-12-12',
                 'tactic_key': 'tacticTest',
                 'created_by': 'Test User',
-                'campaign': 'TestC'}
+                'campaign': 1}
         response = self.client.post('/tactic/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_get_tactic_api(self):
-        self.make_pks()
         client = APIClient()
         response = client.get("/tactic/")
         self.assertEqual(response.status_code, 200)
 
     def test_empty_name_tactic_api(self):
-        self.make_pks()
         data = {'tactic_name': '',
                 'tactic_description': 'This one is mine',
                 'end_date': '2020-12-12',
                 'tactic_key': 'tacticTest',
                 'created_by': 'Test User',
-                'campaign': 'TestC'}
+                'campaign': 1}
         response = self.client.post('/tactic/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_empty_description_tactic_api(self):
-        self.make_pks()
         data = {'tactic_name': 'Test',
                 'tactic_description': '',
                 'end_date': '2020-12-12',
                 'tactic_key': 'tacticTest',
                 'created_by': 'Test User',
-                'campaign': 'TestC'}
+                'campaign': 1}
         response = self.client.post('/tactic/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_empty_date_tactic_api(self):
-        self.make_pks()
         data = {'tactic_name': 'Test',
                 'tactic_description': 'This one is mine',
                 'end_date': '',
                 'tactic_key': 'tacticTest',
                 'created_by': 'Test User',
-                'campaign': 'TestC'}
+                'campaign': 1}
         response = self.client.post('/tactic/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_missing_name_tactic_api(self):
-        self.make_pks()
         data = {'tactic_description': 'This one is mine',
                 'end_date': '2020-12-12',
                 'tactic_key': 'tacticTest',
                 'created_by': 'Test User',
-                'campaign': 'TestC'}
+                'campaign': 1}
         response = self.client.post('/tactic/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_missing_description_tactic_api(self):
-        self.make_pks()
         data = {'tactic_name': 'Test',
                 'end_date': '2020-12-12',
                 'tactic_key': 'tacticTest',
                 'created_by': 'Test User',
-                'campaign': 'TestC'}
+                'campaign': 1}
         response = self.client.post('/tactic/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_bad_date_tactic_api(self):
-        self.make_pks()
         data = {'tactic_name': 'Test',
                 'tactic_description': 'This one is mine',
                 'end_date': 'Nov. 2, 2018',
                 'tactic_key': 'tacticTest',
                 'created_by': 'Test User',
-                'campaign': 'TestC'}
+                'campaign': 1}
         response = self.client.post('/tactic/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_no_data_post_tactic_api(self):
-        self.make_pks()
         data = {}
         response = self.client.post('/tactic/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_bad_param_post_tactic_api(self):
-        self.make_pks()
         data = {'name': 'Test',
                 'tactic_description': 'This one is mine',
                 'end_date': '2020-12-12',
                 'tactic_key': 'tacticTest',
                 'created_by': 'Test User',
-                'campaign': 'TestC'}
+                'campaign': 1}
         response = self.client.post('/tactic/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_name_too_long_post_tactic_api(self):
-        self.make_pks()
         data = {'tactic_name': 'Random o85y9384ytoerty3849yroehg yhvytvyto'
                                'a8y4tyv8ytoeryto8y34o8ythiua48ytlai4ytai47t'
                                'yiow4t8orghowiy4toi4ehtoweit',
@@ -405,12 +376,11 @@ class TacticAPITest(APITestCase):
                 'end_date': '2020-12-12',
                 'tactic_key': 'tacticTest',
                 'created_by': 'Test User',
-                'campaign': 'TestC'}
+                'campaign': 1}
         response = self.client.post('/tactic/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_description_too_long_post_tactic_api(self):
-        self.make_pks()
         data = {'tactic_name': 'Long Description',
                 'tactic_description': 'What happens if this is too long '
                                       'srihgoityow aiytowierhtohirgoirytiors'
@@ -419,7 +389,7 @@ class TacticAPITest(APITestCase):
                 'end_date': '2020-12-12',
                 'tactic_key': 'tacticTest',
                 'created_by': 'Test User',
-                'campaign': 'TestC'}
+                'campaign': 1}
         response = self.client.post('/tactic/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 

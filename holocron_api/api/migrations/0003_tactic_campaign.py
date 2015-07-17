@@ -14,7 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='tactic',
             name='campaign',
-            field=models.ForeignKey(default='no-attribution', to='api.Campaign'),
-            preserve_default=False,
+            field=models.ForeignKey(default=1, to='api.Campaign'),
         ),
     ]
