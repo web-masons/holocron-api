@@ -38,7 +38,7 @@ class Campaign(models.Model):
 class Tactic(models.Model):
     tactic_id = models.AutoField(primary_key=True)
     tactic_key = models.CharField(max_length=100, blank=True, null=True,
-                                    unique=True)
+                                  unique=True)
     tactic_name = models.CharField(max_length=100)
     tactic_description = models.CharField(max_length=140)
     campaign = models.ForeignKey(Campaign)
