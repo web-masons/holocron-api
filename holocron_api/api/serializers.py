@@ -100,8 +100,8 @@ class PlacementSerializer(serializers.ModelSerializer):
                                      "&cm_mmc=", obj.medium, "-_-",
                                      obj.source, "-_-", obj.placement_id,
                                      "-_-", obj.creative.creative_id,
-                                     "&Category=", obj.pageCat,
-                                     "&Page_ID=", obj.pageID)
+                                     "&Category=", obj.page_cat,
+                                     "&Page_ID=", obj.page_id)
 
             else:
                 return string_concat(obj.placement_url, "?utm_campaign=",
@@ -126,8 +126,8 @@ class PlacementSerializer(serializers.ModelSerializer):
                                      "&cm_mmc=", obj.medium, "-_-",
                                      obj.source, "-_-", obj.placement_id,
                                      "-_-", obj.creative.creative_id,
-                                     "&Category=", obj.pageCat,
-                                     "&Page_ID=", obj.pageID)
+                                     "&Category=", obj.page_cat,
+                                     "&Page_ID=", obj.page_id)
 
             else:
                 return string_concat(obj.placement_url, "?utm_campaign=",
