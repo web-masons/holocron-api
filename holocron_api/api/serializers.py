@@ -88,8 +88,8 @@ class PlacementSerializer(serializers.ModelSerializer):
 
     def get_generated_url(self, obj):
         if obj.catid is not None:
-            if (obj.pageID is not None and obj.pageID != "") and \
-                    (obj.pageCat is not None and obj.pageCat != ""):
+            if (obj.page_id is not None and obj.page_id != "") and \
+                    (obj.page_cat is not None and obj.page_cat != ""):
                 return string_concat(obj.placement_url, "?utm_campaign=",
                                      obj.tactic.tactic_key,
                                      "&utm_source=", obj.source,
@@ -100,8 +100,8 @@ class PlacementSerializer(serializers.ModelSerializer):
                                      "&cm_mmc=", obj.medium, "-_-",
                                      obj.source, "-_-", obj.placement_id,
                                      "-_-", obj.creative.creative_id,
-                                     "&Category=", obj.pageCat,
-                                     "&Page_ID=", obj.pageID)
+                                     "&Category=", obj.page_cat,
+                                     "&Page_ID=", obj.page_id)
 
             else:
                 return string_concat(obj.placement_url, "?utm_campaign=",
@@ -115,8 +115,8 @@ class PlacementSerializer(serializers.ModelSerializer):
                                      obj.source, "-_-", obj.placement_id,
                                      "-_-", obj.creative.creative_id)
         else:
-            if (obj.pageID is not None and obj.pageID != "") and \
-                    (obj.pageCat is not None and obj.pageCat != ""):
+            if (obj.page_id is not None and obj.page_id != "") and \
+                    (obj.page_cat is not None and obj.page_cat != ""):
                 return string_concat(obj.placement_url, "?utm_campaign=",
                                      obj.tactic.tactic_key,
                                      "&utm_source=", obj.source,
@@ -126,8 +126,8 @@ class PlacementSerializer(serializers.ModelSerializer):
                                      "&cm_mmc=", obj.medium, "-_-",
                                      obj.source, "-_-", obj.placement_id,
                                      "-_-", obj.creative.creative_id,
-                                     "&Category=", obj.pageCat,
-                                     "&Page_ID=", obj.pageID)
+                                     "&Category=", obj.page_cat,
+                                     "&Page_ID=", obj.page_id)
 
             else:
                 return string_concat(obj.placement_url, "?utm_campaign=",

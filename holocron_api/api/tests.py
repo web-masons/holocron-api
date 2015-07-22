@@ -532,10 +532,10 @@ class PlacementAPITest(APITestCase):
     def test_post_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test Placement",
-                "placement_url": "www.carbonite.com/pricing",
+                "placement_url": "www.test.com/pricing",
                 "catid": 94835,
-                "pageCat": "",
-                "pageID": "",
+                "page_cat": "",
+                "page_id": "",
                 "jira_ticket": "",
                 "start_date": None,
                 "end_date": None,
@@ -549,10 +549,10 @@ class PlacementAPITest(APITestCase):
     def test_post_placement_api_optional_fields(self):
         self.make_pks()
         data = {"placement_name": "Test Placement 2",
-                "placement_url": "www.carbonite.com/pricing",
+                "placement_url": "www.test.com/pricing",
                 "catid": 94835,
-                "pageCat": "Test",
-                "pageID": "Still Test",
+                "page_cat": "Test",
+                "page_id": "Still Test",
                 "jira_ticket": "Ticket-234",
                 "start_date": "2015-07-07",
                 "end_date": "2040-07-07",
