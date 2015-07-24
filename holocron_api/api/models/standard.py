@@ -123,3 +123,4 @@ class Placement(models.Model):
 
     def __str__(self):
         return self.placement_id
+
