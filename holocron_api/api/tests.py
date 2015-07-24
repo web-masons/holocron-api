@@ -524,11 +524,6 @@ class PlacementAPITest(APITestCase):
         response = client.get("/placement/")
         self.assertEqual(response.status_code, 200)
 
-    def test_get_placement_details_api(self):
-        client = APIClient()
-        response = client.get("/placement-details/")
-        self.assertEqual(response.status_code, 200)
-
     def test_post_placement_api(self):
         self.make_pks()
         data = {"placement_name": "Test Placement",
@@ -872,3 +867,15 @@ class PlacementAPITest(APITestCase):
                 "ad_network": 0}
         response = self.client.post('/placement/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class ExportTests(APITestCase):
+    def test_JSONExport_exists(self):
+        client = APIClient()
+        response = client.get("/export/json/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_CSVExport_exists(self):
+        client = APIClient()
+        response = client.get("/export/csv/")
+        self.assertEqual(response.status_code, 200)

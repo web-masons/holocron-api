@@ -5,3 +5,7 @@ factory_boy
 djangorestframework
 psycopg2
 netaddr
+numpy
+pandas
+django-pandas
+rest-pandas
