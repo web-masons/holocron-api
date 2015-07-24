@@ -19,10 +19,11 @@ router.register(r'intent-xref', Intent_xref_ViewSet)
 router.register(r'lifecycle-xref', LifeCycle_xref_ViewSet)
 router.register(r'audience-xref', Audience_xref_ViewSet)
 router.register(r'ad-network', Ad_Network_ViewSet)
-router.register(r'placement-details', PlacementDetailsViewSet)
-router.register(r'placement', PlacementViewSet)
+router.register(r'placement', PlacementViewSet, 'Placment')
 router.register(r'blacklist/rules', BlacklistEntryViewSet)
 router.register(r'blacklist', EntryViewSet)
+router.register(r'export/json', ExportJSONPlacementViewSet, 'Export Json')
+router.register(r'export/csv', ExportCSVPlacementViewSet, 'Export CSV')
 
 
 urlpatterns = [
