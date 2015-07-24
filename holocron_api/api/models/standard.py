@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from Ad_Network import Ad_Network
+from django_pandas.managers import DataFrameManager
 
 
 class Program(models.Model):
@@ -16,7 +17,7 @@ class Program(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.program_key
+        return self.program_name
 
 
 class Campaign(models.Model):
@@ -121,5 +122,6 @@ class Placement(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    objects = DataFrameManager()
     def __str__(self):
         return self.placement_id
