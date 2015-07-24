@@ -123,6 +123,6 @@ class Placement(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     objects = DataFrameManager()
+
     def __str__(self):
         return self.placement_id
-
