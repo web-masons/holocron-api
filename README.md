@@ -43,6 +43,7 @@
 ### Included Apps (Endpoints)
 - API: Manages links and link generation of marketing placements
 - Blacklist Manager: Creates a Blacklist database to use for filtering in other Applications
+- Export: Exports the full, joined view of all placements created using the API Endpoints (Currently supports JSON and CSV)
  
  
 ### DJANGO_SETTINGS_MODULE 

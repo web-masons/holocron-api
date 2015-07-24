@@ -1,6 +1,7 @@
 from api.models import *  # noqa
 from rest_framework import viewsets
 from api.serializers import *  # noqa
+from rest_pandas import PandasViewSet
 
 
 class ProgramViewSet(viewsets.ModelViewSet):
@@ -126,10 +127,12 @@ class PlacementViewSet(viewsets.ModelViewSet):
     serializer_class = PlacementSerializer
 
 
-class PlacementDetailsViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows Placements (with nested JSON)
-    to be viewed or edited.
-    """
+class ExportCSVPlacementViewSet(PandasViewSet):
+    model = Placement
     queryset = Placement.objects.all()
-    serializer_class = PlacementDetailsSerializer
+    serializer_class = PlacementCSVExportSerializer
+
+
+class ExportJSONPlacementViewSet(viewsets.ModelViewSet):
+    queryset = Placement.objects.all()
+    serializer_class = PlacementJSONExportSerilizer

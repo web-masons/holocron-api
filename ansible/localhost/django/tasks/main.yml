@@ -27,5 +27,22 @@
     pip: name=netaddr
     sudo: yes
 
+  - name: Install Numpy for Pandas
+    pip: name=numpy version=1.7.1
+    sudo: yes
+
+  - name: Install Pandas
+    pip: name=pandas
+    sudo: yes
+
+  - name: Install Django Pandas
+    pip: name=django-pandas
+    sudo: yes
+
+  - name: Install Django REST Pandas for exports
+    pip: name=rest-pandas
+    sudo: yes
+
+
   - name: collectstatic for Django
     django_manage: command=collectstatic app_path={{ app_path }}
