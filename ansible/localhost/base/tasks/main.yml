@@ -28,6 +28,8 @@
         - ssl-cert
         - libexpat1
         - libapache2-mod-wsgi
+        - python-numpy
+        - python-scipy
 
     - name: Check NTP service to make sure it's running
       service: name=ntp state=started enabled=yes
