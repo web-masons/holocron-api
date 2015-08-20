@@ -315,14 +315,33 @@ class PlacementCSVExportSerializer(serializers.ModelSerializer):
     def get_creative_updated_on(self, obj):
         return obj.creative.updated
 
+    def retrieve_ad_network(self, obj):
+        try:
+            net = Ad_Network.objects.get(network_key=obj.ad_network)
+            return net
+        except:
+            return False
+
     def get_ad_network_description(self, obj):
-        return obj.ad_network.network_description
+        net = self.retrieve_ad_network(obj)
+        if net:
+            return obj.ad_network.network_description
+        else:
+            return None
 
     def get_ad_network_created_on(self, obj):
-        return obj.ad_network.created_on
+        net = self.retrieve_ad_network(obj)
+        if net:
+            return obj.ad_network.created_on
+        else:
+            return None
 
     def get_ad_network_updated_on(self, obj):
-        return obj.ad_network.updated
+        net = self.retrieve_ad_network(obj)
+        if net:
+            return obj.ad_network.updated
+        else:
+            return None
 
     def retrieve_audience(self, obj):
         try:
