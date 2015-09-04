@@ -125,4 +125,4 @@ class Placement(models.Model):
     objects = DataFrameManager()
 
     def __str__(self):
-        return self.placement_id
+        return str(self.placement_id)
