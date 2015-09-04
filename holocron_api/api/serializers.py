@@ -95,11 +95,10 @@ class PlacementSerializer(serializers.ModelSerializer):
             str_start = '?'
 
         gen_url = string_concat(gen_url, obj.placement_url, str_start,
-                      "utm_campaign=", obj.tactic.tactic_key,
-                      "&utm_source=", obj.source,
-                      "&utm_medium=", obj.medium,
-                      "&utm_content=", obj.placement_id,
-                      )
+                                "utm_campaign=", obj.tactic.tactic_key,
+                                "&utm_source=", obj.source,
+                                "&utm_medium=", obj.medium,
+                                "&utm_content=", obj.placement_id)
 
         if obj.catid is not None:
             gen_url = string_concat(gen_url, "&catid=", obj.catid)
@@ -109,9 +108,8 @@ class PlacementSerializer(serializers.ModelSerializer):
                                 obj.source, "-_-", obj.placement_id,
                                 "-_-", obj.creative.creative_id)
 
-
         if (obj.page_id is not None and obj.page_id != "") and \
-                    (obj.page_cat is not None and obj.page_cat != ""):
+                (obj.page_cat is not None and obj.page_cat != ""):
             gen_url = string_concat(gen_url, "&Category=", obj.page_cat,
                                     "&Page_ID=", obj.page_id)
 
