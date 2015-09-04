@@ -89,7 +89,7 @@ class PlacementSerializer(serializers.ModelSerializer):
     def get_generated_url(self, obj):
         gen_url = ""
 
-        if '?' in obj.placement_url and not():
+        if '?' in obj.placement_url:
             str_start = '&'
         else:
             str_start = '?'
