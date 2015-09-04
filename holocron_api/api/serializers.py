@@ -87,58 +87,35 @@ class PlacementSerializer(serializers.ModelSerializer):
         model = Placement
 
     def get_generated_url(self, obj):
-        if obj.catid is not None:
-            if (obj.page_id is not None and obj.page_id != "") and \
-                    (obj.page_cat is not None and obj.page_cat != ""):
-                return string_concat(obj.placement_url, "?utm_campaign=",
-                                     obj.tactic.tactic_key,
-                                     "&utm_source=", obj.source,
-                                     "&utm_medium=", obj.medium,
-                                     "&utm_content=", obj.placement_id,
-                                     "&catid=", obj.catid,
-                                     "&c3placement=", obj.placement_id,
-                                     "&cm_mmc=", obj.medium, "-_-",
-                                     obj.source, "-_-", obj.placement_id,
-                                     "-_-", obj.creative.creative_id,
-                                     "&Category=", obj.page_cat,
-                                     "&Page_ID=", obj.page_id)
+        gen_url = ""
 
-            else:
-                return string_concat(obj.placement_url, "?utm_campaign=",
-                                     obj.tactic.tactic_key,
-                                     "&utm_source=",  obj.source,
-                                     "&utm_medium=",  obj.medium,
-                                     "&utm_content=", obj.placement_id,
-                                     "&catid=", obj.catid,
-                                     "&c3placement=", obj.placement_id,
-                                     "&cm_mmc=", obj.medium, "-_-",
-                                     obj.source, "-_-", obj.placement_id,
-                                     "-_-", obj.creative.creative_id)
+        if '?' in obj.placement_url and not():
+            str_start = '&'
         else:
-            if (obj.page_id is not None and obj.page_id != "") and \
-                    (obj.page_cat is not None and obj.page_cat != ""):
-                return string_concat(obj.placement_url, "?utm_campaign=",
-                                     obj.tactic.tactic_key,
-                                     "&utm_source=", obj.source,
-                                     "&utm_medium=", obj.medium,
-                                     "&utm_content=", obj.placement_id,
-                                     "&c3placement=", obj.placement_id,
-                                     "&cm_mmc=", obj.medium, "-_-",
-                                     obj.source, "-_-", obj.placement_id,
-                                     "-_-", obj.creative.creative_id,
-                                     "&Category=", obj.page_cat,
-                                     "&Page_ID=", obj.page_id)
+            str_start = '?'
 
-            else:
-                return string_concat(obj.placement_url, "?utm_campaign=",
-                                     obj.tactic.tactic_key,
-                                     "&utm_source=", obj.source,
-                                     "&utm_medium=", obj.medium,
-                                     "&utm_content=", obj.placement_id,
-                                     "&c3placement=", obj.placement_id,
-                                     "&cm_mmc=", obj.medium, "-_-",
-                                     obj.source, "-_-", obj.placement_id,
-                                     "-_-", obj.creative.creative_id)
+        gen_url = string_concat(gen_url, obj.placement_url, str_start,
+                      "utm_campaign=", obj.tactic.tactic_key,
+                      "&utm_source=", obj.source,
+                      "&utm_medium=", obj.medium,
+                      "&utm_content=", obj.placement_id,
+                      )
+
+        if obj.catid is not None:
+            gen_url = string_concat(gen_url, "&catid=", obj.catid)
+
+        gen_url = string_concat(gen_url, "&c3placement=", obj.placement_id,
+                                "&cm_mmc=", obj.medium, "-_-",
+                                obj.source, "-_-", obj.placement_id,
+                                "-_-", obj.creative.creative_id)
+
+
+        if (obj.page_id is not None and obj.page_id != "") and \
+                    (obj.page_cat is not None and obj.page_cat != ""):
+            gen_url = string_concat(gen_url, "&Category=", obj.page_cat,
+                                    "&Page_ID=", obj.page_id)
+
+        return gen_url
 
 
 class PlacementJSONExportSerilizer(serializers.ModelSerializer):
