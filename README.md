@@ -150,11 +150,14 @@
     jira_ticket = String (Max Length = 20, optional)
     pageID = String (optional)
     pageCat = String (optional)
+    promo_uid = Integer (optional)
     ad_network = Ad_Network FK (optional)
     start_date = Date
     end_date = Date
     created_on = Date and Time
     updated = Date and Time
+    
+    Note: pageID, pageCat and promo_uid are unique to Pardot implementations at this time.
     
 # Custom Attributes Models and Fields# 
 ## Intent
