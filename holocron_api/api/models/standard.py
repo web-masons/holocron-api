@@ -115,6 +115,7 @@ class Placement(models.Model):
     catid = models.IntegerField(blank=True, null=True)
     page_cat = models.CharField(max_length=100, blank=True, null=True)
     page_id = models.CharField(max_length=100, blank=True, null=True)
+    promo_uid = models.IntegerField(blank=True, null=True)
     ad_network = models.ForeignKey(Ad_Network, blank=True, null=True)
     jira_ticket = models.CharField(max_length=20, blank=True, default="")
     start_date = models.DateField('Start Date', blank=True, null=True)
