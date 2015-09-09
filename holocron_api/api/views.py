@@ -135,4 +135,4 @@ class ExportCSVPlacementViewSet(PandasViewSet):
 
 class ExportJSONPlacementViewSet(viewsets.ModelViewSet):
     queryset = Placement.objects.all()
-    serializer_class = PlacementJSONExportSerilizer
+    serializer_class = PlacementJSONExportSerializer

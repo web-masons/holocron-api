@@ -113,10 +113,13 @@ class PlacementSerializer(serializers.ModelSerializer):
             gen_url = string_concat(gen_url, "&Category=", obj.page_cat,
                                     "&Page_ID=", obj.page_id)
 
+        if obj.promo_uid is not None and obj.promo_uid != "":
+            gen_url = string_concat(gen_url, "&PromoUID=", obj.promo_uid)
+
         return gen_url
 
 
-class PlacementJSONExportSerilizer(serializers.ModelSerializer):
+class PlacementJSONExportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Placement
         depth = 3
