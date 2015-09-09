@@ -119,7 +119,7 @@ class PlacementSerializer(serializers.ModelSerializer):
         return gen_url
 
 
-class PlacementJSONExportSerilizer(serializers.ModelSerializer):
+class PlacementJSONExportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Placement
         depth = 3
