@@ -5,7 +5,7 @@ from Intent import Intent
 
 
 class Intent_xref(models.Model):
-    i_key = models.ForeignKey(Intent)
+    i_key = models.ForeignKey(Intent, on_delete=models.PROTECT)
     p_key = models.OneToOneField(Placement)
 
     def __str__(self):
