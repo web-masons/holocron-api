@@ -5,7 +5,7 @@ from Lifecycle import LifeCycle
 
 
 class Lifecycle_xref(models.Model):
-    lc_key = models.ForeignKey(LifeCycle)
+    lc_key = models.ForeignKey(LifeCycle, on_delete=models.PROTECT)
     p_key = models.OneToOneField(Placement)
 
     def __str__(self):
