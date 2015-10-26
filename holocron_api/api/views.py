@@ -1,7 +1,9 @@
 from api.models import *  # noqa
 from rest_framework import viewsets
 from api.serializers import *  # noqa
+from rest_framework import filters
 from rest_pandas import PandasViewSet
+import django_filters
 
 
 class ProgramViewSet(viewsets.ModelViewSet):
@@ -9,9 +11,27 @@ class ProgramViewSet(viewsets.ModelViewSet):
     serializer_class = ProgramSerializer
 
 
+class CampaignFilter(django_filters.FilterSet):
+    program = django_filters.CharFilter(name="program__program_id")
+
+    class Meta:
+        model = Campaign
+        fields = ['program']
+
+
 class CampaignViewSet(viewsets.ModelViewSet):
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = CampaignFilter
+
+
+class TacticFilter(django_filters.FilterSet):
+    campaign = django_filters.CharFilter(name="campaign__campaign_id")
+
+    class Meta:
+        model = Tactic
+        fields = ['campaign']
 
 
 class TacticViewSet(viewsets.ModelViewSet):
@@ -20,6 +40,8 @@ class TacticViewSet(viewsets.ModelViewSet):
     """
     queryset = Tactic.objects.all()
     serializer_class = TacticSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = TacticFilter
 
 
 class MediumViewSet(viewsets.ModelViewSet):
