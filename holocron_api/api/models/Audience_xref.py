@@ -5,7 +5,7 @@ from Audience import Audience
 
 
 class Audience_xref(models.Model):
-    a_key = models.ForeignKey(Audience)
+    a_key = models.ForeignKey(Audience, on_delete=models.PROTECT)
     p_key = models.OneToOneField(Placement)
 
     def __str__(self):

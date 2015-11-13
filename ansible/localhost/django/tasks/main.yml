@@ -43,6 +43,10 @@
     pip: name=rest-pandas
     sudo: yes
 
+  - name: Install Django Filters for filtered GETs
+    pip: name=django-filter
+    sudo: yes
+
 
   - name: collectstatic for Django
     django_manage: command=collectstatic app_path={{ app_path }}

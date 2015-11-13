@@ -5,7 +5,7 @@ from LOB import LOB
 
 
 class LOB_xref(models.Model):
-    lob_key = models.ForeignKey(LOB)
+    lob_key = models.ForeignKey(LOB, on_delete=models.PROTECT)
     p_key = models.OneToOneField(Placement)
 
     def __str__(self):
