@@ -104,3 +104,9 @@
         creates: /etc/apache2/sites-enabled/{{ domain }}.conf
       notify:
         - restart apache2
+
+    - name: a2enmod headers
+      command: a2enmod headers
+      sudo: yes
+      notify:
+        - restart apache2
