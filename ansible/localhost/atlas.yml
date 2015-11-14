@@ -12,6 +12,11 @@
     dbuser: django-test
     dbpassword: testing
     dbpassword_env: "{{ lookup('env','HOLOCRON_DB_PASS') }}"
+    apache_mods_enabled:
+      - headers.load
+      - rewrite.load
+      - ssl.load
+    apache_mods_disabled: []
   tasks:
 
   roles:
