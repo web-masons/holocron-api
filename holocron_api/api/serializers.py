@@ -103,10 +103,7 @@ class PlacementSerializer(serializers.ModelSerializer):
         if obj.catid is not None:
             gen_url = string_concat(gen_url, "&catid=", obj.catid)
 
-        gen_url = string_concat(gen_url, "&c3placement=", obj.placement_id,
-                                "&cm_mmc=", obj.medium, "-_-",
-                                obj.source, "-_-", obj.placement_id,
-                                "-_-", obj.creative.creative_id)
+        gen_url = string_concat(gen_url, "&c3placement=", obj.placement_id)
 
         if (obj.page_id is not None and obj.page_id != "") and \
                 (obj.page_cat is not None and obj.page_cat != ""):
@@ -281,17 +278,40 @@ class PlacementCSVExportSerializer(serializers.ModelSerializer):
     def get_source_updated_on(self, obj):
         return obj.source.updated
 
+    def retrieve_creative(self, obj):
+        try:
+            crt = Creative.objects.get(creative_id=obj.creative)
+            return crt
+        except:
+            return False
+
     def get_creative_key(self, obj):
-        return obj.creative.creative_description
+        crt = self.retrieve_creative(obj)
+        if crt:
+            return obj.creative.creative_id
+        else:
+            return None
 
     def get_creative_name(self, obj):
-        return obj.creative.creative_name
+        crt = self.retrieve_creative(obj)
+        if crt:
+            return obj.creative.creative_name
+        else:
+            return None
 
     def get_creative_created_on(self, obj):
-        return obj.creative.created_on
+        crt = self.retrieve_creative(obj)
+        if crt:
+            return obj.creative.created_on
+        else:
+            return None
 
     def get_creative_updated_on(self, obj):
-        return obj.creative.updated
+        crt = self.retrieve_creative(obj)
+        if crt:
+            return obj.creative.updated
+        else:
+            return None
 
     def retrieve_ad_network(self, obj):
         try:

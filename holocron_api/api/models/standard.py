@@ -95,7 +95,7 @@ class Source(models.Model):
 
 class Creative(models.Model):
     creative_id = models.AutoField(primary_key=True)
-    creative_name = models.CharField(max_length=100, unique=True)
+    creative_name = models.CharField(max_length=100)
     creative_description = models.CharField(max_length=140)
     created_on = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
