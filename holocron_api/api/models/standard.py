@@ -7,7 +7,7 @@ from django_pandas.managers import DataFrameManager
 
 class Program(models.Model):
     program_id = models.AutoField(primary_key=True)
-    program_name = models.CharField(max_length=100)
+    program_name = models.CharField(max_length=100, unique=True)
     program_description = models.CharField(max_length=140)
     created_by = models.CharField(max_length=100)
     program_notes = models.CharField(max_length=140, blank=True)
@@ -22,7 +22,7 @@ class Program(models.Model):
 
 class Campaign(models.Model):
     campaign_id = models.AutoField(primary_key=True)
-    campaign_name = models.CharField(max_length=100)
+    campaign_name = models.CharField(max_length=100, unique=True)
     campaign_description = models.CharField(max_length=140)
     program = models.ForeignKey(Program, on_delete=models.PROTECT)
     created_by = models.CharField(max_length=100)
@@ -75,7 +75,7 @@ post_save.connect(update_key, sender=Tactic)
 
 class Medium(models.Model):
     medium_key = models.SlugField(max_length=100, primary_key=True)
-    medium_name = models.CharField(max_length=100)
+    medium_name = models.CharField(max_length=100, unique=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -85,7 +85,7 @@ class Medium(models.Model):
 
 class Source(models.Model):
     source_key = models.SlugField(max_length=100, primary_key=True)
-    source_name = models.CharField(max_length=100)
+    source_name = models.CharField(max_length=100, unique=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -95,7 +95,7 @@ class Source(models.Model):
 
 class Creative(models.Model):
     creative_id = models.AutoField(primary_key=True)
-    creative_name = models.CharField(max_length=100)
+    creative_name = models.CharField(max_length=100, unique=True)
     creative_description = models.CharField(max_length=140)
     created_on = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -106,12 +106,13 @@ class Creative(models.Model):
 
 class Placement(models.Model):
     placement_id = models.AutoField(primary_key=True)
-    placement_name = models.CharField(max_length=100)
+    placement_name = models.CharField(max_length=100, unique=True)
     placement_url = models.CharField(max_length=250)
+    placement_description = models.CharField(max_length=140, blank=True, null=True)
     tactic = models.ForeignKey(Tactic, on_delete=models.PROTECT)
     medium = models.ForeignKey(Medium, on_delete=models.PROTECT)
     source = models.ForeignKey(Source, on_delete=models.PROTECT)
-    creative = models.ForeignKey(Creative, on_delete=models.PROTECT)
+    creative = models.ForeignKey(Creative, blank=True, null=True, on_delete=models.SET_NULL)
     catid = models.IntegerField(blank=True, null=True)
     page_cat = models.CharField(max_length=100, blank=True, null=True)
     page_id = models.CharField(max_length=100, blank=True, null=True)
