@@ -140,6 +140,17 @@ class Ad_Network_ViewSet(viewsets.ModelViewSet):
     serializer_class = Ad_Network_Serializer
 
 
+class PlacementFilter(django_filters.FilterSet):
+    tactic = django_filters.CharFilter(name="tactic__tactic_id")
+    medium = django_filters.CharFilter(name="medium__medium_key")
+    source = django_filters.CharFilter(name="source__source_key")
+    ad_network = django_filters.CharFilter(name="ad_network__network_key")
+
+    class Meta:
+        model = Placement
+        fields = ['tactic', 'medium', 'source', 'ad_network']
+
+
 class PlacementViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Placements (with Foreign Keys)
@@ -147,6 +158,8 @@ class PlacementViewSet(viewsets.ModelViewSet):
     """
     queryset = Placement.objects.all()
     serializer_class = PlacementSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = PlacementFilter
 
 
 class ExportCSVPlacementViewSet(PandasViewSet):
