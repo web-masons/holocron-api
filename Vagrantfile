@@ -5,7 +5,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
   # Use Ansible Citadel box
-  config.vm.box = "oakensoul/ansible-citadel"
+  #config.vm.box = "oakensoul/ansible-citadel"
+  config.vm.box = "ubuntu/trusty64"
 
   # Forward SSH keys to the Guest VM
   config.ssh.forward_agent = true
@@ -21,13 +22,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       node.vm.network :private_network, ip: '192.168.42.42'
   end
 
+  #install ansible
+    config.vm.provision :shell,
+      :privileged => true,
+      :keep_color => true,
+      :inline => "apt-get -y install software-properties-common && apt-add-repository ppa:ansible/ansible && apt-get update && apt-get -y install ansible"
+
+
   # We're going to use the shell provider to install Ansible so that we can run
   # it within the Guest VM, not outside
   config.vm.provision :shell,
       :privileged => true,
       :keep_color => true,
 
-      :inline => "export PYTHONUNBUFFERED=1 && export ANSIBLE_FORCE_COLOR=1 && cd /vagrant/ansible/localhost && ./provision.sh"
+      :inline => "export PYTHONUNBUFFERED=1 && export ANSIBLE_FORCE_COLOR=1 && cd /vagrant/ansible && ansible-galaxy install -r localhost/requirements.txt -p localhost/ --force && cd /vagrant/ansible/localhost && ./provision.sh"
 
   config.push.define "atlas" do |push|
     push.app = ""
