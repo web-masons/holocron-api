@@ -28,18 +28,10 @@
         - python-numpy
         - python-scipy
         - python-pandas
-#        - apache2
-#        - apache2-mpm-prefork
-#        - apache2-utils
-
 
     - name: Check NTP service to make sure it's running
       service: name=ntp state=started enabled=yes
       sudo: yes
-
-#    - name: Check Apache service to make sure it's running
-#      service: name=apache2 state=started enabled=yes
-#      sudo: yes
 
     - name: Install ufw
       apt: name=ufw
@@ -51,57 +43,3 @@
       ufw: proto=tcp port=80 rule=allow
     - name: Allow apache ssl firewall
       ufw: proto=tcp port=443 rule=allow
-
-#    - name: enabled mod_rewrite
-#      apache2_module: name=rewrite state=present
-#      notify:
-#        - restart apache2
-#
-#    - name: a2ensite ssl
-#      command: a2enmod ssl
-#      notify:
-#        - restart apache2
-#
-#    - name: check for SSL folder
-#      stat: path=/etc/apache2/ssl
-#      register: ssl_path
-#
-#    - name: create SSL folder
-#      command: mkdir /etc/apache2/ssl
-#      when: ssl_path.stat.exists == false
-#
-#    - name: apache2 NameVirtualHost Port
-#      lineinfile: dest=/etc/apache2/ports.conf regexp="^NameVirtualHost " line="" state=present
-#      notify:
-#        - restart apache2
-#
-#    - name: apache2 listen on Specified Port
-#      lineinfile: dest=/etc/apache2/ports.conf regexp="^Listen " line="" state=present
-#      notify:
-#        - restart apache2
-#
-
-#
-#    - name: apache2 virtualhost on Specified Port
-#      lineinfile: dest=/etc/apache2/sites-available/{{ domain }} regexp="^<VirtualHost \*:" line="<VirtualHost *:{{ http_port }}>"
-#      notify:
-#        - restart apache2
-#
-#    - name: check for Default file
-#      stat: path=/etc/apache2/sites-enabled/000-default
-#      register: default_file_check
-#
-#    - name: delete default file
-#      command: rm /etc/apache2/sites-enabled/000-default
-#      when: default_file_check.stat.exists
-#      sudo: yes
-#      notify:
-#        - restart apache2
-#
-
-#
-#    - name: a2enmod headers
-#      command: a2enmod headers
-#      sudo: yes
-#      notify:
-#        - restart apache2
