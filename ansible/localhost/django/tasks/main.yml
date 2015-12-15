@@ -6,9 +6,9 @@
   - name: collectstatic for Django
     django_manage: command=collectstatic app_path={{ app_path }}
 
-  - name: run migrations for Django
+  - name: run migrations for Django in dev
     django_manage: command=migrate app_path={{ app_path }}
-
+    when: app_path == "/vagrant"
 
   - name: create virtual host file
     template: src=virtualhost.conf dest=/etc/apache2/sites-available/{{ domain }}.conf

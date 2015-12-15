@@ -20,6 +20,7 @@
       - rewrite.load
       - ssl.load
       - wsgi.load
+      - setenvif.load
     apache_mods_disabled: []
   tasks:
 
