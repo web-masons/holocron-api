@@ -33,7 +33,7 @@ INSTALLED_APPS = (
 
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',)
-    'PAGE_SIZE': 100,
+    'PAGE_SIZE': 1000,
     #'PAGINATE_BY': 10,
     #'PAGINATE_BY_PARAM': 'page_size',
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)

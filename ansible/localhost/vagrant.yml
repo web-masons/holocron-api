@@ -2,6 +2,10 @@
 - hosts: all
   sudo: true
   vars:
+    apache_listen_port: 80
+    apache_listen_port_ssl: 443
+    apache_create_vhosts: false
+    apache_remove_default_vhosts: true
     http_port: 443
     domain: holocron-api.com
     project: holocron-api
@@ -15,10 +19,13 @@
       - headers.load
       - rewrite.load
       - ssl.load
+      - wsgi.load
+      - setenvif.load
     apache_mods_disabled: []
   tasks:
 
   roles:
   - { role: base }
+  - { role: geerlingguy.apache }
   - { role: db }
-  - { role: django }
+  - { role: django, domain: "{{ domain }}" }

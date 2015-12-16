@@ -67,3 +67,15 @@ target/
 # vagrantfile - to prevent commiting the push config.
 # override manually if you want to push changes using git add
 Vagrantfile
+
+# ignore ant ansible galaxy roles installed in vagrant vm
+ansible/localhost/*
+!ansible/localhost/base
+!ansible/localhost/django
+!ansible/localhost/db
+!ansible/localhost/requirements.txt
+!ansible/localhost/atlas.yml
+!ansible/localhost/vagrant.yml
+!ansible/localhost/provision.sh
+
+
