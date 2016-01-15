@@ -7,7 +7,7 @@
     apache_create_vhosts: false
     apache_remove_default_vhosts: true
     http_port: 443
-    domain: holocron-api.com
+    app_domain: holocron-api.com
     project: holocron-api
     app_path: /vagrant/holocron_api
     app: api
@@ -28,4 +28,4 @@
   - { role: base }
   - { role: geerlingguy.apache }
   - { role: db }
-  - { role: django, domain: "{{ domain }}" }
+  - { role: django, domain: "{{ app_domain }}" }
