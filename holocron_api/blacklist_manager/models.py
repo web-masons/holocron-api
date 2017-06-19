@@ -19,7 +19,7 @@ class BlacklistEntry(models.Model):
     added_by = models.CharField(max_length=100)
     created_on = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    entry = models.CharField(max_length=100, unique=True)
+    entry = models.CharField(max_length=255, unique=True)
 
     class Meta:
         app_label = "blacklist_manager"
@@ -35,7 +35,7 @@ class Entries(models.Model):
     entry_type = models.CharField(max_length=2,
                                   choices=ENTRY_TYPE_CHOICES,
                                   default=IP_ADDRESS)
-    entry = models.CharField(max_length=100, unique=True)
+    entry = models.CharField(max_length=255, unique=True)
     related_to = models.CharField(max_length=20)
     description = models.CharField(max_length=100)
     update_by = models.CharField(max_length=100)
