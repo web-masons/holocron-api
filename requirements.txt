@@ -3,7 +3,7 @@ django-filter
 django-model-utils==2.3.1
 django-pandas
 django-test-pep8
-djangorestframework
+djangorestframework==3.2
 factory-boy
 fake-factory
 netaddr
